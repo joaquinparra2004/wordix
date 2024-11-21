@@ -132,43 +132,55 @@ function escribirMensajeBienvenida($usuario)
 }
 
 
-/**
- * ****COMPLETAR*****
+/*
+ * Función que recorre una cadena de texto y verifica si cada carácter es una letra
+ * @PARAM INT $texto
+ * @RETURN 
  */
 function esPalabra($cadena)
 {
-    //int $cantCaracteres, $i, boolean $esLetra
-    $cantCaracteres = strlen($cadena);
+    $cantCaracteres = strlen($cadena); // strlen obtiene la cantidad de caracteres de la cadena
+
     $esLetra = true;
     $i = 0;
+
+    // Bucle que recorre cada carácter de la cadena mientras no se haya encontrado un carácter no alfabético
     while ($esLetra && $i < $cantCaracteres) {
-        $esLetra =  ctype_alpha($cadena[$i]);
+        
+        $esLetra = ctype_alpha($cadena[$i]); // ctype_alpha()  verifica si el carácter actual en la posición $i es una letra
+
         $i++;
     }
+
+    // Si la cadena contiene solo letras, $esLetra será true; si no, será false
     return $esLetra;
 }
 
-/**
- *  ****COMPLETAR*****
+
+/*
+ * Funcion que pide al usuario ingresar palabra de 5 letras y retorna la palabra en mayuscula
+ * @RETURN STRING
  */
 function leerPalabra5Letras()
 {
-    //string $palabra
+    //STRING $palabra
     echo "Ingrese una palabra de 5 letras: ";
     $palabra = trim(fgets(STDIN));
-    $palabra  = strtoupper($palabra);
+    $palabra  = strtoupper($palabra); //convierte las letras ingresadas en mayuscula
 
-    while ((strlen($palabra) != 5) || !esPalabra($palabra)) {
+    //bucle que mientras la palabra sea distinta a 5 letras o esPalabra() sea falso entonces ingresara de nuevo una palabra
+    while ((strlen($palabra) != 5) || !esPalabra($palabra)) { 
         echo "Debe ingresar una palabra de 5 letras:";
         $palabra = strtoupper(trim(fgets(STDIN)));
     }
+
     return $palabra;
 }
 
 
-/**
+/*
  * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
- *@return array
+ * @RETURN ARRAY
  */
 function iniciarTeclado()
 {
