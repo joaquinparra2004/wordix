@@ -1,0 +1,13 @@
+Ejemplo de cómo representar las estructuras de datos según lo visto en teoría:							
+							
+$coleccionPalabras=	 0	      1	      2	      3	      4	      5	    //indices
+	               MUJER	QUESO	FUEGO	CASAS	RASGO	GATOS	//valores
+							
+	Información de la estructura:						
+	Tipo: Indexado (los índices son numéricos)						
+	Tipos de datos: Almacena valores String						
+	¿Para qué se utiliza?: guarda las palabras que se pueden elegidas para jugar wordix						
+							
+							
+A continuación puede agregar el resto de las estructuras de datos							
+**** COMPLETAR ****							
