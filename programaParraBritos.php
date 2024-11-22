@@ -9,11 +9,6 @@ include_once("wordix.php");
 /* Parra Joaquin -  FAI 5556 - TUDW - joaquinparra.nqn@gmail.com - joaquinparra2004 */
 /* Britos Gabriel - FAI 5629 - TUDW - gabriel.britos.epet20@gmail.com - gBritos11 */
 
-
-/**************************************/
-/***** DEFINICION DE FUNCIONES ********/
-/**************************************/
-
 /**************************************/
 /****** DECLARACIÓN DE ARRAYS *********/
 /**************************************/
@@ -95,7 +90,7 @@ function cargarPartidas( $cantPartidas, $coleccionPalabras, $coleccionJugadores 
 
         $palabraWordix = $coleccionPalabras[ array_rand( $coleccionPalabras ) ];
         $jugador = $coleccionJugadores[ array_rand( $coleccionJugadores ) ];
-        $puntaje = rand( 0, 24 );
+        $puntaje = rand( 0, 24 );//el puntaje se da segun una norma dada, usar funcion
 
         $coleccionPartidas[] = [
             "palabraWordix" => $palabraWordix,
@@ -108,10 +103,14 @@ function cargarPartidas( $cantPartidas, $coleccionPalabras, $coleccionJugadores 
     return $coleccionPartidas;
 }
 
+/**************************************/
+/***** DEFINICION DE FUNCIONES ********/
+/**************************************/
+
 /**
  * Muestra menu de opciones disponibles
  * @param array $opcionesDisponibles = opciones disponibles para que el usuario elija
- * @return array
+ * @return int
 */
 function seleccionarOpcion( $opcionesDisponibles ){
     /*
@@ -127,6 +126,7 @@ function seleccionarOpcion( $opcionesDisponibles ){
     };
 
     $opcionElegida = solicitarNumeroEntre(1, 8); //Función de wordix.php
+
     return $opcionElegida;
 }
 

@@ -9,13 +9,18 @@ Puede ser utilizada por cualquier programador para incluir en sus programas.
 /**************************************/
 /***** DEFINICION DE CONSTANTES *******/
 /**************************************/
+
+/*
+    Cantidad de intentos por cada partida
+*/
 const CANT_INTENTOS = 6;
 
 /*
-    disponible: letra que aún no fue utilizada para adivinar la palabra
-    encontrada: letra descubierta en el lugar que corresponde
-    pertenece: letra descubierta, pero corresponde a otro lugar
-    descartada: letra descartada, no pertence a la palabra
+    ESTADOS DE LAS LETRAS:
+        disponible => letra que aún no fue utilizada para adivinar la palabra
+        encontrada => letra descubierta en el lugar que corresponde
+        pertenece => letra descubierta, pero corresponde a otro lugar
+        descartada => letra descartada, no pertence a la palabra
 */
 const ESTADO_LETRA_DISPONIBLE = "disponible";
 const ESTADO_LETRA_ENCONTRADA = "encontrada";
@@ -23,169 +28,19 @@ const ESTADO_LETRA_DESCARTADA = "descartada";
 const ESTADO_LETRA_PERTENECE = "pertenece";
 
 /**************************************/
-/***** DEFINICION DE FUNCIONES ********/
+/****** DECLARACIÓN DE ARRAYS *********/
 /**************************************/
 
-/**
- *  ****COMPLETAR*****
- */
-function solicitarNumeroEntre($min, $max)
-{
-    //int $numero
+/** 
+ * Inicia un array de las letras del abecedario
+ * @return array
+*/
+function iniciarTeclado(){
+    /*
+        array:
+            $teclado = array asociativo, cuyas claves son las letras del alfabeto
+    */
 
-    echo "Seleccionar número ";
-    $numero = trim(fgets(STDIN));
-
-    if (is_numeric($numero)) { //determina si un string es un número. puede ser float como entero.
-        $numero  = $numero * 1; //con esta operación convierto el string en número.
-    }
-    while (!(is_numeric($numero) && (($numero == (int)$numero) && ($numero >= $min && $numero <= $max)))) {
-        echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
-        $numero = trim(fgets(STDIN));
-        if (is_numeric($numero)) {
-            $numero  = $numero * 1;
-        }
-    }
-    return $numero;
-}
-
-/**
- * Escrbir un texto en color ROJO
- * @param string $texto)
- */
-function escribirRojo($texto)
-{
-    echo "\e[1;37;41m $texto \e[0m";
-}
-
-/**
- * Escrbir un texto en color VERDE
- * @param string $texto)
- */
-function escribirVerde($texto)
-{
-    echo "\e[1;37;42m $texto \e[0m";
-}
-
-/**
- * Escrbir un texto en color AMARILLO
- * @param string $texto)
- */
-function escribirAmarillo($texto)
-{
-    echo "\e[1;37;43m $texto \e[0m";
-}
-
-/**
- * Escrbir un texto en color GRIS
- * @param string $texto)
- */
-function escribirGris($texto)
-{
-    echo "\e[1;34;47m $texto \e[0m";
-}
-
-/**
- * Escrbir un texto pantalla.
- * @param string $texto)
- */
-function escribirNormal($texto)
-{
-    echo "\e[0m $texto \e[0m";
-}
-
-/**
- * Escribe un texto en pantalla teniendo en cuenta el estado.
- * @param string $texto
- * @param string $estado
- */
-function escribirSegunEstado($texto, $estado)
-{
-    switch ($estado) {
-        case ESTADO_LETRA_DISPONIBLE:
-            escribirNormal($texto);
-            break;
-        case ESTADO_LETRA_ENCONTRADA:
-            escribirVerde($texto);
-            break;
-        case ESTADO_LETRA_PERTENECE:
-            escribirAmarillo($texto);
-            break;
-        case ESTADO_LETRA_DESCARTADA:
-            escribirRojo($texto);
-            break;
-        default:
-            echo " $texto ";
-            break;
-    }
-}
-
-/**
- * ****COMPLETAR*****
- */
-function escribirMensajeBienvenida($usuario)
-{
-    echo "***************************************************\n";
-    echo "** Hola ";
-    escribirAmarillo($usuario);
-    echo " Juguemos una PARTIDA de WORDIX! **\n";
-    echo "***************************************************\n";
-}
-
-
-/*
- * Función que recorre una cadena de texto y verifica si cada carácter es una letra
- * @PARAM INT $texto
- * @RETURN 
- */
-function esPalabra($cadena)
-{
-    $cantCaracteres = strlen($cadena); // strlen obtiene la cantidad de caracteres de la cadena
-
-    $esLetra = true;
-    $i = 0;
-
-    // Bucle que recorre cada carácter de la cadena mientras no se haya encontrado un carácter no alfabético
-    while ($esLetra && $i < $cantCaracteres) {
-        
-        $esLetra = ctype_alpha($cadena[$i]); // ctype_alpha()  verifica si el carácter actual en la posición $i es una letra
-
-        $i++;
-    }
-
-    // Si la cadena contiene solo letras, $esLetra será true; si no, será false
-    return $esLetra;
-}
-
-
-/*
- * Funcion que pide al usuario ingresar palabra de 5 letras y retorna la palabra en mayuscula
- * @RETURN STRING
- */
-function leerPalabra5Letras()
-{
-    //STRING $palabra
-    echo "Ingrese una palabra de 5 letras: ";
-    $palabra = trim(fgets(STDIN));
-    $palabra  = strtoupper($palabra); //convierte las letras ingresadas en mayuscula
-
-    //bucle que mientras la palabra sea distinta a 5 letras o esPalabra() sea falso entonces ingresara de nuevo una palabra
-    while ((strlen($palabra) != 5) || !esPalabra($palabra)) { 
-        echo "Debe ingresar una palabra de 5 letras:";
-        $palabra = strtoupper(trim(fgets(STDIN)));
-    }
-
-    return $palabra;
-}
-
-
-/*
- * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
- * @RETURN ARRAY
- */
-function iniciarTeclado()
-{
-    //array $teclado (arreglo asociativo, cuyas claves son las letras del alfabeto)
     $teclado = [
         "A" => ESTADO_LETRA_DISPONIBLE, "B" => ESTADO_LETRA_DISPONIBLE, "C" => ESTADO_LETRA_DISPONIBLE, "D" => ESTADO_LETRA_DISPONIBLE, "E" => ESTADO_LETRA_DISPONIBLE,
         "F" => ESTADO_LETRA_DISPONIBLE, "G" => ESTADO_LETRA_DISPONIBLE, "H" => ESTADO_LETRA_DISPONIBLE, "I" => ESTADO_LETRA_DISPONIBLE, "J" => ESTADO_LETRA_DISPONIBLE,
@@ -194,8 +49,225 @@ function iniciarTeclado()
         "T" => ESTADO_LETRA_DISPONIBLE, "U" => ESTADO_LETRA_DISPONIBLE, "V" => ESTADO_LETRA_DISPONIBLE, "W" => ESTADO_LETRA_DISPONIBLE, "X" => ESTADO_LETRA_DISPONIBLE,
         "Y" => ESTADO_LETRA_DISPONIBLE, "Z" => ESTADO_LETRA_DISPONIBLE
     ];
+
     return $teclado;
 }
+
+/**************************************/
+/***** DEFINICION DE FUNCIONES ********/
+/**************************************/
+
+/**************************************/
+/*********** PINTAR TEXTOS ************/
+/**************************************/
+
+/**
+ * Escrbir un texto en color ROJO
+ * @param string $texto
+*/
+function escribirRojo( $texto ){
+    echo "\e[1;37;41m $texto \e[0m";
+}
+
+/**
+ * Escrbir un texto en color VERDE
+ * @param string $texto
+*/
+function escribirVerde( $texto ){
+    echo "\e[1;37;42m $texto \e[0m";
+}
+
+/**
+ * Escrbir un texto en color AMARILLO
+ * @param string $texto
+*/
+function escribirAmarillo( $texto ){
+    echo "\e[1;37;43m $texto \e[0m";
+}
+
+/**
+ * Escrbir un texto en color GRIS
+ * @param string $texto
+*/
+function escribirGris( $texto ){
+    echo "\e[1;34;47m $texto \e[0m";
+}
+
+/**
+ * Escrbir un texto pantalla.
+ * @param string $texto
+*/
+function escribirNormal( $texto ){
+    echo "\e[0m $texto \e[0m";
+}
+
+/**
+ * Escribe un texto en pantalla teniendo en cuenta el estado.
+ * @param string $texto
+ * @param string $estado
+*/
+function escribirSegunEstado( $texto, $estado ){
+    switch( $estado ){
+        case ESTADO_LETRA_DISPONIBLE:
+            escribirNormal( $texto );
+            break;
+        case ESTADO_LETRA_ENCONTRADA:
+            escribirVerde( $texto );
+            break;
+        case ESTADO_LETRA_PERTENECE:
+            escribirAmarillo( $texto );
+            break;
+        case ESTADO_LETRA_DESCARTADA:
+            escribirRojo( $texto );
+            break;
+        default:
+            echo " $texto ";
+            break;
+    }
+}
+
+/**************************************/
+/************* MENSAJES ***************/
+/**************************************/
+
+/**
+ * Escribe un mensaje de bienvenida a los usuarios
+ * @param string $usuario = user del jugador
+*/
+function escribirMensajeBienvenida( $usuario ){
+    echo "***************************************************\n";
+    echo "** Hola ";
+    escribirAmarillo( $usuario );
+    echo " Juguemos una PARTIDA de WORDIX! **\n";
+    echo "***************************************************\n";
+}
+
+/**************************************/
+/************ PEDIR NÚMERO ************/
+/**************************************/
+
+/**
+ * Solicita un número en un rango dado
+ * @param int $min = limite inferior del rango
+ * @param int $max = limite superior del rango
+ * @return int 
+ * 
+*/
+function solicitarNumeroEntre( $min, $max ){
+    /*
+        int:
+            $numero = número ingresado por teclado
+    */
+
+    echo "Por favor elegir un número: ";
+    $numero = trim( fgets( STDIN ) );
+
+    //Me aseguro que sea un número válido
+    if ( is_numeric( $numero ) ) { //determina si se ingreso un string en forma de número
+        $numero  = $numero * 1; //con esta operación convierto el string en número.
+    }
+
+    //Mientras que el número ingresado no sea un número válido, no sea un número entero o no esté dentro del rango especificado, sigo pidiendo un número
+    while ( !( is_numeric( $numero ) && ( ( $numero == ( int ) $numero ) && ( $numero >= $min && $numero <= $max ) ) ) ){
+
+        echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
+        $numero = trim(fgets(STDIN));
+
+        //Me aseguro que sea un número válido
+        if ( is_numeric( $numero ) ){
+            $numero  = $numero * 1;
+        }
+    }
+
+    return $numero;
+}
+
+/**************************************/
+/*********** VERIFICACIONES ***********/
+/**************************************/
+
+/**
+ * Recorre una cadena de texto y verifica si cada carácter es una letra 
+ * @param string $cadena = cadena de texto que quiero verificar que sean solo caracteres alfabéticos
+ * @return boolean
+*/
+function esPalabra( $cadena ){
+    /*
+        int:
+            $cantCaracteres = cantidad de caracteres de una cadena
+            $cont = contador que puede incrementar su valor
+
+        boolean:
+            $esLetra = se inicializa en true ya que se asume que todos los caracteres de la cadena son letras
+    */
+
+    $cantCaracteres = strlen( $cadena ); // strlen obtiene la cantidad de caracteres de la cadena
+
+    $esLetra = true;
+    $cont = 0;
+
+    // Bucle que recorre cada carácter de la cadena mientras no se haya encontrado un carácter no alfabético
+    while ($esLetra && $cont < $cantCaracteres) {
+        
+        $esLetra = ctype_alpha( $cadena[ $cont ] ); // ctype_alpha()  verifica si el carácter actual en la posición $cont es una letra. Si no es una letra, devuelve false y saldrá del bucle
+
+        $cont++;
+    }
+
+    // Si la cadena contiene solo letras, $esLetra será true; si no, será false
+    return $esLetra;
+}
+
+/**
+ * Pide al usuario ingresar palabra de 5 letras y retorna la palabra en mayuscula
+ * @return string
+*/
+function leerPalabra5Letras(){
+    /*
+        string:
+            $palabra = palabra ingresada por el usuario
+    */
+
+    echo "Ingrese una palabra de 5 letras: ";
+    $palabra = trim(fgets(STDIN));
+    $palabra  = strtoupper($palabra); //convierte las letras ingresadas en mayuscula
+
+    //bucle que mientras la palabra sea distinta a 5 letras o esPalabra() sea falso entonces ingresara de nuevo una palabra
+    while ( ( strlen( $palabra ) != 5 ) || !esPalabra( $palabra ) ){ 
+
+        echo "Debe ingresar una palabra de 5 letras:";
+        $palabra = strtoupper(trim(fgets(STDIN)));
+    }
+
+    return $palabra;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
