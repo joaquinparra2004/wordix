@@ -9,13 +9,18 @@ Puede ser utilizada por cualquier programador para incluir en sus programas.
 /**************************************/
 /***** DEFINICION DE CONSTANTES *******/
 /**************************************/
+
+/*
+    Cantidad de intentos por cada partida
+*/
 const CANT_INTENTOS = 6;
 
 /*
-    disponible: letra que aún no fue utilizada para adivinar la palabra
-    encontrada: letra descubierta en el lugar que corresponde
-    pertenece: letra descubierta, pero corresponde a otro lugar
-    descartada: letra descartada, no pertence a la palabra
+    ESTADOS DE LAS LETRAS:
+        disponible => letra que aún no fue utilizada para adivinar la palabra
+        encontrada => letra descubierta en el lugar que corresponde
+        pertenece => letra descubierta, pero corresponde a otro lugar
+        descartada => letra descartada, no pertence a la palabra
 */
 const ESTADO_LETRA_DISPONIBLE = "disponible";
 const ESTADO_LETRA_ENCONTRADA = "encontrada";
@@ -23,53 +28,43 @@ const ESTADO_LETRA_DESCARTADA = "descartada";
 const ESTADO_LETRA_PERTENECE = "pertenece";
 
 /**************************************/
+/****** DECLARACIÓN DE ARRAYS *********/
+/**************************************/
+
+/**
+ *  ****COMPLETAR*****
+ */
+function solicitarNumeroEntre($min, $max)
+{
+    //int $numero
+
+    $numero = trim(fgets(STDIN));
+
+    if (is_numeric($numero)) { //determina si un string es un número. puede ser float como entero.
+        $numero  = $numero * 1; //con esta operación convierto el string en número.
+    }
+    while (!(is_numeric($numero) && (($numero == (int)$numero) && ($numero >= $min && $numero <= $max)))) {
+        echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
+        $numero = trim(fgets(STDIN));
+        if (is_numeric($numero)) {
+            $numero  = $numero * 1;
+        }
+    }
+    return $numero;
+}
+
+/**************************************/
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
-/*
- * La funcion Solicita un número entre un valor mínimo y máximo al usuario.
- * Valida que el número ingresado sea un número entero dentro del rango especificado.
- * 
- * @PARAM INT $min
- * @PARAM INT $max 
- * @RETURN INT 
- */
-
-function solicitarNumeroEntre($min, $max)
-{
-    //INT $numero 
-    // Se declara la variable que almacenará el número ingresado por el usuario
-    $numero = trim(fgets(STDIN)); 
-
-    // is_numerc() verifica si el número ingresado es numérico
-    if (is_numeric($numero)) {
-        // Si es un número, lo convertimos a tipo numérico (puede ser un entero o flotante)
-        $numero = $numero * 1; // Multiplicar por 1 convierte el valor a tipo numérico
-    }
-
-    // Se inicia el bucle que si no es un numero numerico, numero que no es entero y numero no esta entre min y max
-    while (!(is_numeric($numero) && (($numero == (int)$numero) && ($numero >= $min && $numero <= $max)))) {
-        // Si el número no es válido, se le solicita nuevamente al usuario un número dentro del rango
-        echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
-        
-        // Leer la entrada nuevamente
-        $numero = trim(fgets(STDIN));
-
-        // Verificar nuevamente si es un número
-        if (is_numeric($numero)) {
-            // Convertimos a número en caso de que haya sido ingresado como cadena
-            $numero = $numero * 1;
-        }
-    }
-
-    // Retorna el número válido
-    return $numero;
-}
+/**************************************/
+/*********** PINTAR TEXTOS ************/
+/**************************************/
 
 
 /*
  * Escrbir un texto en color ROJO
- * @PARAM STRING  $texto
+ * @param string $texto)
  */
 function escribirRojo($texto)
 {
@@ -78,7 +73,7 @@ function escribirRojo($texto)
 
 /*
  * Escrbir un texto en color VERDE
- * @PARAM STRING $texto
+ * @param string $texto)
  */
 function escribirVerde($texto)
 {
@@ -87,7 +82,7 @@ function escribirVerde($texto)
 
 /*
  * Escrbir un texto en color AMARILLO
- * @PARAM STRING  $texto
+ * @param string $texto)
  */
 function escribirAmarillo($texto)
 {
@@ -96,7 +91,7 @@ function escribirAmarillo($texto)
 
 /*
  * Escrbir un texto en color GRIS
- * @PARAM STRING  $texto
+ * @param string $texto)
  */
 function escribirGris($texto)
 {
@@ -105,32 +100,32 @@ function escribirGris($texto)
 
 /*
  * Escrbir un texto pantalla.
- * @PARAM STRING  $texto
+ * @param string $texto)
  */
 function escribirNormal($texto)
 {
     echo "\e[0m $texto \e[0m";
 }
 
-/*
- * funcion que escribe un texto en pantalla teniendo en cuenta el estado.
- * @PARAM STRING $texto
- * @PARAM STRING $estado
+/**
+ * Escribe un texto en pantalla teniendo en cuenta el estado.
+ * @param string $texto
+ * @param string $estado
  */
 function escribirSegunEstado($texto, $estado)
 {
     switch ($estado) {
         case ESTADO_LETRA_DISPONIBLE:
-            escribirNormal($texto);
+            escribirNormal( $texto );
             break;
         case ESTADO_LETRA_ENCONTRADA:
-            escribirVerde($texto);
+            escribirVerde( $texto );
             break;
         case ESTADO_LETRA_PERTENECE:
-            escribirAmarillo($texto);
+            escribirAmarillo( $texto );
             break;
         case ESTADO_LETRA_DESCARTADA:
-            escribirRojo($texto);
+            escribirRojo( $texto );
             break;
         default:
             echo " $texto ";
@@ -138,15 +133,18 @@ function escribirSegunEstado($texto, $estado)
     }
 }
 
-/*
- * Funcion que muestra mensaje de bienvenida al usuario 
- * @PARAM STRING $usuario
+/**************************************/
+/************* MENSAJES ***************/
+/**************************************/
+
+/**
+ * ****COMPLETAR*****
  */
 function escribirMensajeBienvenida($usuario)
 {
     echo "***************************************************\n";
     echo "** Hola ";
-    escribirAmarillo($usuario); // llama a funcion escribirAmarillo()
+    escribirAmarillo($usuario);
     echo " Juguemos una PARTIDA de WORDIX! **\n";
     echo "***************************************************\n";
 }
@@ -159,9 +157,6 @@ function escribirMensajeBienvenida($usuario)
  */
 function esPalabra($cadena)
 {
-    // BOOLEAN $esLetra
-    // INT $i
-
     $cantCaracteres = strlen($cadena); // strlen obtiene la cantidad de caracteres de la cadena
 
     $esLetra = true;
@@ -202,7 +197,7 @@ function leerPalabra5Letras()
 
 
 /*
- * Funcion que inicia una estructura de datos Teclado. La estructura es de tipo:  asociativo
+ * Inicia una estructura de datos Teclado. La estructura es de tipo: ¿Indexado, asociativo o Multidimensional?
  * @RETURN ARRAY
  */
 function iniciarTeclado()
@@ -219,11 +214,10 @@ function iniciarTeclado()
     return $teclado;
 }
 
-/*
- * funcion que escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
- * @PARAM ARRAY $teclado
+/**
+ * Escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
+ * @param array $teclado
  */
-
 function escribirTeclado($teclado)
 {
     //array $ordenTeclado (arreglo indexado con el orden en que se debe escribir el teclado en pantalla)
@@ -235,7 +229,6 @@ function escribirTeclado($teclado)
         "Z", "X", "C", "V", "B", "N", "M", "salto"
     ];
 
-    // Recorremos cada tecla definida en el orden del teclado
     foreach ($ordenTeclado as $letra) {
         switch ($letra) {
             case 'salto':
@@ -243,10 +236,7 @@ function escribirTeclado($teclado)
                 echo "\n";
                 break;
             default:
-                // Si existe, se le asigna el valor asociado a esa clave; si no existe, se asigna un valor por defecto (en este caso, 'desactivada').
-                $estado = isset($teclado[$letra]) ? $teclado[$letra] : 'desactivada';
-                
-                // Llamamos a la función escribirSegunEstado() para escribir la tecla según su estado
+                $estado = $teclado[$letra];
                 escribirSegunEstado($letra, $estado);
                 break;
         }
@@ -255,27 +245,18 @@ function escribirTeclado($teclado)
     echo "\n";
 };
 
-
-/*
- * funcion que escribe en pantalla los intentos de Wordix para adivinar la palabra
- * @PARAM ARRAY $estruturaIntentosWordix
+/**
+ * Escribe en pantalla los intentos de Wordix para adivinar la palabra
+ * @param array $estruturaIntentosWordix
  */
 function imprimirIntentosWordix($estructuraIntentosWordix)
 {
-    //INT $cantIntentosRealizados,$cantIntentosFaltantes
-
-    //cuenta cuantos intentos realizados hizo
     $cantIntentosRealizados = count($estructuraIntentosWordix);
-    //calcula intentos restantes
-    $cantIntentosFaltantes = CANT_INTENTOS - $cantIntentosRealizados;
+    //$cantIntentosFaltantes = CANT_INTENTOS - $cantIntentosRealizados;
 
-   // Imprime los intentos realizados hasta el momento
     for ($i = 0; $i < $cantIntentosRealizados; $i++) {
         $estructuraIntento = $estructuraIntentosWordix[$i];
-        // Se imprime el número del intento, iniciando desde 1
         echo "\n" . ($i + 1) . ")  ";
-
-        // Se recorre cada letra del intento, y se imprime con su estado
         foreach ($estructuraIntento as $intentoLetra) {
             escribirSegunEstado($intentoLetra["letra"], $intentoLetra["estado"]);
         }
@@ -284,27 +265,23 @@ function imprimirIntentosWordix($estructuraIntentosWordix)
         echo "\n";
     }
 
-    // Imprime los intentos restantes que no han sido realizados
-    for ($i = $cantIntentosRealizados; $i < 6; $i++) {
-        // Imprime el número del intento, seguido de espacios vacíos para los intentos restantes
+    for ($i = $cantIntentosRealizados; $i < CANT_INTENTOS; $i++) {
         echo "\n" . ($i + 1) . ")  ";
-
-        // Imprime 5 espacios vacíos (una por cada letra en un intento)
         for ($j = 0; $j < 5; $j++) {
-            escribirGris(" ");
+            escribirGris(" ");//*cuadrado grises(???*
         }
     }
-    echo "\n" . "Le quedan " . $cantIntentosFaltantes . " Intentos para adivinar la palabra!";
+    //echo "\n" . "Le quedan " . $cantIntentosFaltantes . " Intentos para adivinar la palabra!";
 }
 
 /*
  * Dada la palabra wordix a adivinar, la estructura para almacenar la información del intento 
  * y la palabra que intenta adivinar la palabra wordix.
  * devuelve la estructura de intentos Wordix modificada con el intento.
- * @PARAM STRING $palabraWordix
- * @PARAM ARRAY $estruturaIntentosWordix
- * @PARAM STRING $palabraIntento
- * @RETURN ARRAY estructura wordix modificada
+ * @param string $palabraWordix
+ * @param array $estruturaIntentosWordix
+ * @param string $palabraIntento
+ * @return array estructura wordix modificada
  */
 function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palabraIntento)
 {
@@ -315,19 +292,60 @@ function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palab
         $posicion = strpos($palabraWordix, $letraIntento);
         if ($posicion === false) {
             $estado = ESTADO_LETRA_DESCARTADA;
-        } else {
-            if ($letraIntento == $palabraWordix[$i]) {
+
+        } else { //si la letra estimativa se encuentra, obtiene un estado: 'encontrada' o 'pertenece'
+            //si la letra estimativa coincide en posicion y caracter pasa a estado 'encontrada'
+            if ($letraEstimativa == $palabraWordix[$cont]) {
                 $estado = ESTADO_LETRA_ENCONTRADA;
+
             } else {
+                //en caso de que la letra coincida en caracter pero no en posicion pasa a estado 'pertenece'
                 $estado = ESTADO_LETRA_PERTENECE;
             }
         }
-        array_push($estructuraPalabraIntento, ["letra" => $letraIntento, "estado" => $estado]);
+
+        //se agrega dos elementos al array $estructuraPalabraIntento. "letra" y "estado" con sus respectivo valores
+        array_push($estructuraPalabraIntento, ["letra" => $letraEstimativa, "estado" => $estado]);
     }
 
+    /*se agrega un elemento al array $estruturaIntentosWordix.
+    En este caso, cada elemento del array $estruturaIntentosWordix es un sub-array igual a $estructuraPalabraIntento,
+    que representa cada intento del jugador de adivinar la palabra*/
     array_push($estruturaIntentosWordix, $estructuraPalabraIntento);
+
     return $estruturaIntentosWordix;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
  * Actualiza el estado de las letras del teclado. 
@@ -336,9 +354,9 @@ function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palab
  * de ESTADO_LETRA_DISPONIBLE a ESTADO_LETRA_DESCARTADA, 
  * de ESTADO_LETRA_DISPONIBLE a ESTADO_LETRA_PERTENECE
  * de ESTADO_LETRA_PERTENECE a ESTADO_LETRA_ENCONTRADA
- * @PARAM ARRAY $teclado
- * @PARAM ARRAY $estructuraPalabraIntento
- * @RETURN ARRAY el teclado modificado con los cambios de estados.
+ * @param array $teclado
+ * @param array $estructuraPalabraIntento
+ * @return array el teclado modificado con los cambios de estados.
  */
 function actualizarTeclado($teclado, $estructuraPalabraIntento)
 {
@@ -358,6 +376,38 @@ function actualizarTeclado($teclado, $estructuraPalabraIntento)
     }
     return $teclado;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
  * funcion que determina si se ganó una palabra intento posee todas sus letras "Encontradas".
