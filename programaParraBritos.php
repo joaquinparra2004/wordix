@@ -1,5 +1,5 @@
 <?php
-include_once("wordix.php");
+//include_once("wordix.php");
 
 /**************************************/
 /***** DATOS DE LOS INTEGRANTES *******/
@@ -14,21 +14,52 @@ include_once("wordix.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+/**************************************/
+/****** DECLARACIÓN DE ARRAYS *********/
+/**************************************/
+
 /**
- * Funcion que obtiene una colección de palabras
+ * Obtiene una colección de palabras
  * @return array
- */
-function cargarColeccionPalabras()
-{
+*/
+function cargarColeccionPalabras(){
     $coleccionPalabras = [
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
         "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
         "TENIS", "POLLO", "VERDE", "ARBOL", "JAMON",
         "TECLA", "HORAS", "PATOS", "VODKA", "MOUSE",
+        "SOLAR", "LARGO", "CIELO", "NUEVO", "VIAJE",
+        "SALTA", "FRUTA", "CIEGA", "PUNTO", "CAMPO"
     ];
+
     return ($coleccionPalabras);
 }
+
+/**
+ * Obtiene una colección de jugadores
+ * @return array
+*/
+function cargarColeccionJugadores(){
+    $coleccionJugadores = [
+        "Joaquin", "Ana", "Pedro", "Luisa",
+        "Carla", "Juan", "Lucas", "Maria",
+        "Pedro", "Marta", "Camila", "Roberto",
+        "Jorge", "Diana", "Luis", "Marcos"
+    ];
+
+    return ($coleccionJugadores);
+}
+
+
+
+
+
+
+
+
+
+
 
 
 /**
