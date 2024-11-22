@@ -31,21 +31,29 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /****** DECLARACIÓN DE ARRAYS *********/
 /**************************************/
 
-/**
- *  ****COMPLETAR*****
+/*
+ * funcion que solicita al usuario un número entero dentro de un rango específico.
+ * el valor ingresado debe ser un número entero, y debe estar entre los valores de $min y $max.
+ *
+ * @PARAM INT $min, el límite inferior del rango válido.
+ * @PARAM INT  $max, el límite superior del rango válido.
+ * @RETURN INT 
  */
 function solicitarNumeroEntre($min, $max)
 {
     //int $numero
-
     $numero = trim(fgets(STDIN));
 
-    if (is_numeric($numero)) { //determina si un string es un número. puede ser float como entero.
+    if (is_numeric($numero)) { // is_numeric() determina si un string es un número. puede ser float como entero.
         $numero  = $numero * 1; //con esta operación convierto el string en número.
     }
+
+    // Ciclo que se repite mientras el número, ni sea un numero numerico válido , no sea numero entero y no este entre el minimo y el maximo
     while (!(is_numeric($numero) && (($numero == (int)$numero) && ($numero >= $min && $numero <= $max)))) {
         echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
         $numero = trim(fgets(STDIN));
+        
+        // Verificar si la nueva entrada es un número
         if (is_numeric($numero)) {
             $numero  = $numero * 1;
         }
