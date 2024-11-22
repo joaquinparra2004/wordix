@@ -52,6 +52,25 @@ function cargarColeccionJugadores(){
 }
 
 /**
+ * Obtiene las opciones disponibles
+ * @return array
+*/
+function opcionesDisponibles(){
+    $opciones = [
+        "Jugar Wordix con una palabra elegida",
+        "Jugar Wordix con una palabra aleatoria",
+        "Mostrar una partida",
+        "Mostrar la primera partida ganadora",
+        "Mostar resumen del jugador",
+        "Mostrar listado de partidas ordenadas por jugador y por palabra",
+        "Agregar una palabra de 5 letras a Wordix",
+        "Salir"
+    ];
+
+    return $opciones;
+}
+
+/**
  * Obtiene una coleccion de partidas ya jugadas
  * @param int $cantPartidas = cantidad de partidas que quiero generar
  * @param array $coleccionPalabras = array de palabras Wordix
@@ -89,98 +108,70 @@ function cargarPartidas( $cantPartidas, $coleccionPalabras, $coleccionJugadores 
     return $coleccionPartidas;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
- * Funcion que muestra menu de opciones  que el usuario puede seleccionar
+ * Muestra menu de opciones disponibles
+ * @param array $opcionesDisponibles = opciones disponibles para que el usuario elija
  * @return array
- */
+*/
+function seleccionarOpcion( $opcionesDisponibles ){
+    /*
+        int:
+            $cont = contador que puede incrementar su valor
+            $opciónElegida = número de opción elegida por el usuario
+    */
+    
+    echo "Seleccionar opción: \n";
 
- function seleccionarOpcion()
- {// int opcion
-    echo "\n";
-    echo "\n***************************************************\n";
-    echo "Bienvenido jugador, seleccione una opción del 1 al 8: \n";
-    echo "1: Jugar con palabra elegida. \n";
-    echo "2: Jugar con palabra aleatoria. \n";
-    echo "3: Mostrar una partida. \n";
-    echo "4: Mostrar la primer partida ganada de un jugador. \n";
-    echo "5: Mostrar el resumen de un jugador. \n";
-    echo "6: Mostrar listado de partidas ordenadas por jugador y palabra. \n";
-    echo "7: Agregar una palabra a la colección de Wordix. \n";
-    echo "8: Salir de wordix. \n";
-    $opcion = solicitarNumeroEntre(1, 8); //llamamos a funcion de wordix.php
-    return ($opcion);
- }
+    for( $cont = 1; $cont <= count( $opcionesDisponibles ); $cont++ ){
+        echo "[$cont] " . $opcionesDisponibles[ $cont - 1 ] . "\n";
+    };
+
+    $opcionElegida = solicitarNumeroEntre(1, 8); //Función de wordix.php
+    return $opcionElegida;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
  * Funcion que pide al usuario ingresar palabra de 5 letras
  * @return string
  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -196,7 +187,7 @@ function cargarPartidas( $cantPartidas, $coleccionPalabras, $coleccionJugadores 
 
 //Proceso:
 
-$partida = jugarWordix("MELON", strtolower("MaJo"));
+//$partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
 
