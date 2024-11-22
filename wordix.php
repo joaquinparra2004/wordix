@@ -269,14 +269,32 @@ function leerPalabra5Letras(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
  * @param array $teclado
- */
-function escribirTeclado($teclado)
-{
-    //array $ordenTeclado (arreglo indexado con el orden en que se debe escribir el teclado en pantalla)
-    //string $letra, $estado
+*/
+function escribirTeclado( $teclado ){
+    /*
+        array:
+            $ordenTeclado = arreglo indexado con el orden en que se debe escribir el teclado en pantalla
+        string:
+            $letra = valor de las letras del teclado ("a", "b", "c", etc)
+            $estado = mismo valor que $letra, que se asocia a un estado declarado en el array iniciarTeclado
+        
+    */
     $ordenTeclado = [
         "salto",
         "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "salto",
@@ -284,19 +302,27 @@ function escribirTeclado($teclado)
         "Z", "X", "C", "V", "B", "N", "M", "salto"
     ];
 
-    foreach ($ordenTeclado as $letra) {
-        switch ($letra) {
+    foreach ( $ordenTeclado as $letra ) {
+        switch ( $letra ) {
             case 'salto':
                 echo "\n";
                 break;
             default:
-                $estado = $teclado[$letra];
-                escribirSegunEstado($letra, $estado);
+                $estado = $teclado[ $letra ];
+                escribirSegunEstado( $letra, $estado );
                 break;
         }
     }
     echo "\n";
 };
+
+
+
+
+
+
+
+
 
 
 /**
