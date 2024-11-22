@@ -53,6 +53,14 @@ function iniciarTeclado(){
     return $teclado;
 }
 
+/**
+ * Inicia un array de intentos por partida. Se guardará en forma de sub-array cada intento del jugador
+ * @return array
+*/
+function estruturaIntentosWordix(){
+    return $intentosWordix = [];
+}
+
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
@@ -140,6 +148,84 @@ function escribirMensajeBienvenida( $usuario ){
     escribirAmarillo( $usuario );
     echo " Juguemos una PARTIDA de WORDIX! **\n";
     echo "***************************************************\n";
+}
+
+/**
+ * Escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
+ * @param array $teclado
+*/
+function escribirTeclado( $teclado ){
+    /*
+        array:
+            $ordenTeclado = arreglo indexado con el orden en que se debe escribir el teclado en pantalla
+            
+        string:
+            $letra = valor de las letras del teclado ("a", "b", "c", etc)
+            $estado = mismo valor que $letra, que se asocia a un estado declarado en el array iniciarTeclado
+        
+    */
+    $ordenTeclado = [
+        "salto",
+        "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "salto",
+        "A", "S", "D", "F", "G", "H", "J", "K", "L", "salto",
+        "Z", "X", "C", "V", "B", "N", "M", "salto"
+    ];
+
+    foreach ( $ordenTeclado as $letra ) {
+        switch ( $letra ) {
+            case 'salto':
+                echo "\n";
+                break;
+            default:
+                $estado = $teclado[ $letra ];
+                escribirSegunEstado( $letra, $estado );
+                break;
+        }
+    }
+    echo "\n";
+};
+
+/**
+ * Escribe en pantalla los intentos del jugador para adivinar la palabra
+ * @param array $estruturaIntentosWordix
+*/
+function imprimirIntentosWordix( $estructuraIntentosWordix ){
+    /*
+        int:
+            $cantIntentosRealizados = cantidad de intentos realizados
+            $cantIntentosFaltantes = cantidad de intentos faltantes
+            $cont, $i, $j = contador que puede incrementar su valor
+
+        array:
+            $estructuraPalabraIntento = almacena cada intento por adivinar la palabra
+            $intentoLetra = almacena cada letra y su respectivo estado de cada intento por adivinar la palabra
+    */
+
+    $cantIntentosRealizados = count( $estructuraIntentosWordix) ;
+    $cantIntentosFaltantes = CANT_INTENTOS - $cantIntentosRealizados;
+
+    //por cada intento pinta las letras de la palabra según corresponda
+    for ( $cont = 0; $cont < $cantIntentosRealizados; $cont++ ) {
+
+        $estructuraPalabraIntento = $estructuraIntentosWordix[$cont];
+
+        echo "\n" . ($cont + 1) . ")  ";//1) ; 2) ;3) ; etc..
+
+        foreach ($estructuraPalabraIntento as $intentoLetra) {
+            escribirSegunEstado($intentoLetra["letra"], $intentoLetra["estado"]);
+        }
+        echo "\n";
+    }
+
+    // muestra visualmente la cantidad de intentos que faltan
+    for ($i = $cantIntentosRealizados; $i < CANT_INTENTOS; $i++) {
+        echo "\n" . ($i + 1) . ")  ";//1) ; 2) ;3) ; etc..
+        for ($j = 0; $j < 5; $j++) {
+            escribirGris(" ");//*cuadrado grises(???*
+        }
+        echo "\n";
+    }
+    echo "\n" . "Le quedan " . $cantIntentosFaltantes . " Intentos para adivinar la palabra!";
 }
 
 /**************************************/
@@ -242,148 +328,101 @@ function leerPalabra5Letras(){
     return $palabra;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * Escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
- * @param array $teclado
-*/
-function escribirTeclado( $teclado ){
-    /*
-        array:
-            $ordenTeclado = arreglo indexado con el orden en que se debe escribir el teclado en pantalla
-        string:
-            $letra = valor de las letras del teclado ("a", "b", "c", etc)
-            $estado = mismo valor que $letra, que se asocia a un estado declarado en el array iniciarTeclado
-        
-    */
-    $ordenTeclado = [
-        "salto",
-        "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "salto",
-        "A", "S", "D", "F", "G", "H", "J", "K", "L", "salto",
-        "Z", "X", "C", "V", "B", "N", "M", "salto"
-    ];
-
-    foreach ( $ordenTeclado as $letra ) {
-        switch ( $letra ) {
-            case 'salto':
-                echo "\n";
-                break;
-            default:
-                $estado = $teclado[ $letra ];
-                escribirSegunEstado( $letra, $estado );
-                break;
-        }
-    }
-    echo "\n";
-};
-
-
-
-
-
-
-
-
-
-
-/**
- * Escribe en pantalla los intentos de Wordix para adivinar la palabra
- * @param array $estruturaIntentosWordix
- */
-function imprimirIntentosWordix($estructuraIntentosWordix)
-{
-    $cantIntentosRealizados = count($estructuraIntentosWordix);
-    //$cantIntentosFaltantes = CANT_INTENTOS - $cantIntentosRealizados;
-
-    for ($i = 0; $i < $cantIntentosRealizados; $i++) {
-        $estructuraIntento = $estructuraIntentosWordix[$i];
-        echo "\n" . ($i + 1) . ")  ";
-        foreach ($estructuraIntento as $intentoLetra) {
-            escribirSegunEstado($intentoLetra["letra"], $intentoLetra["estado"]);
-        }
-        echo "\n";
-    }
-
-    for ($i = $cantIntentosRealizados; $i < CANT_INTENTOS; $i++) {
-        echo "\n" . ($i + 1) . ")  ";
-        for ($j = 0; $j < 5; $j++) {
-            escribirGris(" ");
-        }
-        echo "\n";
-    }
-    //echo "\n" . "Le quedan " . $cantIntentosFaltantes . " Intentos para adivinar la palabra!";
-}
-
 /**
  * Dada la palabra wordix a adivinar, la estructura para almacenar la información del intento 
- * y la palabra que intenta adivinar la palabra wordix.
- * devuelve la estructura de intentos Wordix modificada con el intento.
- * @param string $palabraWordix
- * @param array $estruturaIntentosWordix
- * @param string $palabraIntento
+ * y la palabra estimativa:
+ * devuelve la estructura de intentos Wordix modificada con cada intento.
+ * @param string $palabraWordix = palabra que se intenta adivinar
+ * @param array $estruturaIntentosWordix = estructura donde se guardará cada intento de adivinar la palabra
+ * @param string $palabraEstimativa = palabra que se ingresa por teclado y el usuario estima que es la correcta para ganar
  * @return array estructura wordix modificada
- */
-function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palabraIntento)
-{
-    $cantCaracteres = strlen($palabraIntento);
-    $estructuraPalabraIntento = []; /*almacena cada letra de la palabra intento con su estado */
-    for ($i = 0; $i < $cantCaracteres; $i++) {
-        $letraIntento = $palabraIntento[$i];
-        $posicion = strpos($palabraWordix, $letraIntento);
+*/
+function analizarPalabraIntento( $palabraWordix, $estruturaIntentosWordix, $palabraEstimativa ){
+    /*
+        int:
+            $cantCaracteres = cantidad de caracteres de la palabra estivativa
+            $cont = contador que puede incrementar su valor
+
+        array: 
+            $estructuraPalabraIntento = almacena cada letra de la palabra estimativa con su estado
+
+        string:
+            $letraEstimativa = almacena un letra de la palabra estimativa
+            $estado = almacena el estado de cada letra (descartada, encontrada, pertenece)
+
+        boolean:
+            $posicion
+    */
+
+    $cantCaracteres = strlen($palabraEstimativa);
+
+    $estructuraPalabraIntento = [];
+
+    //recorro letra por letra de la palabra estimativa para saber su estado
+    for ($cont = 0; $cont < $cantCaracteres; $cont++) {
+
+        //selecciono una letra de la palabra estimativa (primero la primera, segundo la segunda, etc...)
+        $letraEstimativa = $palabraEstimativa[$cont];
+
+        //si no se encuentra la letra estimativa en la palabra wordix devuelve "false" por lo que la letra quedará descartada.
+        $posicion = strpos($palabraWordix, $letraEstimativa);/*strpos: busca la aparicion de la letra estimativa en la palabra wordix*/
+
         if ($posicion === false) {
             $estado = ESTADO_LETRA_DESCARTADA;
-        } else {
-            if ($letraIntento == $palabraWordix[$i]) {
+
+        } else { //si la letra estimativa se encuentra, obtiene un estado: 'encontrada' o 'pertenece'
+            //si la letra estimativa coincide en posicion y caracter pasa a estado 'encontrada'
+            if ($letraEstimativa == $palabraWordix[$cont]) {
                 $estado = ESTADO_LETRA_ENCONTRADA;
+
             } else {
+                //en caso de que la letra coincida en caracter pero no en posicion pasa a estado 'pertenece'
                 $estado = ESTADO_LETRA_PERTENECE;
             }
         }
-        array_push($estructuraPalabraIntento, ["letra" => $letraIntento, "estado" => $estado]);
+
+        //se agrega dos elementos al array $estructuraPalabraIntento. "letra" y "estado" con sus respectivo valores
+        array_push($estructuraPalabraIntento, ["letra" => $letraEstimativa, "estado" => $estado]);
     }
 
+    /*se agrega un elemento al array $estruturaIntentosWordix.
+    En este caso, cada elemento del array $estruturaIntentosWordix es un sub-array igual a $estructuraPalabraIntento,
+    que representa cada intento del jugador de adivinar la palabra*/
     array_push($estruturaIntentosWordix, $estructuraPalabraIntento);
+
     return $estruturaIntentosWordix;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Actualiza el estado de las letras del teclado. 
@@ -395,9 +434,9 @@ function analizarPalabraIntento($palabraWordix, $estruturaIntentosWordix, $palab
  * @param array $teclado
  * @param array $estructuraPalabraIntento
  * @return array el teclado modificado con los cambios de estados.
- */
-function actualizarTeclado($teclado, $estructuraPalabraIntento)
-{
+*/
+function actualizarTeclado( $teclado, $estructuraPalabraIntento ){
+
     foreach ($estructuraPalabraIntento as $letraIntento) {
         $letra = $letraIntento["letra"];
         $estado = $letraIntento["estado"];
@@ -414,6 +453,38 @@ function actualizarTeclado($teclado, $estructuraPalabraIntento)
     }
     return $teclado;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Determina si se ganó una palabra intento posee todas sus letras "Encontradas".
