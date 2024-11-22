@@ -410,8 +410,9 @@ function obtenerPuntajeWordix($intentos, $palabra)
     //INT $puntaje
     //ARRAY $abecedario
     if ($intentos <= 6) {
-        $puntaje = 7 - $intentos; // siempre el puntaje va ser 1 punto menos que la cantidad de intentos
-    } else {
+        $puntaje = CANT_INTENTOS - $intentos; // siempre el puntaje va ser 1 punto menos que la cantidad de intentos
+    } 
+    else {
         $puntaje = 0; //sino puntaje es 0
     };
 
@@ -425,11 +426,13 @@ function obtenerPuntajeWordix($intentos, $palabra)
 
             //in_array verificar si la letra existe dentro deL arreglo $abcededario
             if (in_array($palabra[$i], $abecedario[0])) {
-                $puntaje = $puntaje + 1; // si la letra esta en el abcedario 1 , suma 1 punto
-            } else if (in_array($palabraSeparada[$i], $abecedario[1])) {
-                $puntaje = $puntaje + 2;
-            } else {
-                $puntaje = $puntaje + 3;
+                $puntaje = $puntaje + 1; // si la letra esta en el abcedario 0 , suma 1 puntos
+            } 
+            else if (in_array($palabraSeparada[$i], $abecedario[1])) {
+                $puntaje = $puntaje + 2; // si la letra esta en el abcedario 1 , suma 2 puntos
+            } 
+            else {
+                $puntaje = $puntaje + 3; // si la letra esta en el abcedario 2 , suma 3 puntos
             }
         }
     }
