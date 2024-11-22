@@ -1,5 +1,5 @@
 <?php
-//include_once("wordix.php");
+include_once("wordix.php");
 
 /**************************************/
 /***** DATOS DE LOS INTEGRANTES *******/
@@ -33,7 +33,7 @@ function cargarColeccionPalabras(){
         "SALTA", "FRUTA", "CIEGA", "PUNTO", "CAMPO"
     ];
 
-    return ($coleccionPalabras);
+    return $coleccionPalabras;
 }
 
 /**
@@ -48,50 +48,64 @@ function cargarColeccionJugadores(){
         "Jorge", "Diana", "Luis", "Marcos"
     ];
 
-    return ($coleccionJugadores);
+    return $coleccionJugadores;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /**
- * Funcion que obtiene una coleccion de partidas ya jugadas
+ * Obtiene una coleccion de partidas ya jugadas
+ * @param int $cantPartidas = cantidad de partidas que quiero generar
+ * @param array $coleccionPalabras = array de palabras Wordix
+ * @param array $coleccionJugadores = arra de jugadores registrados
  * @return array
- */
+*/
 
-function cargarPartidas()
-{
+function cargarPartidas( $cantPartidas, $coleccionPalabras, $coleccionJugadores ){
+    /*
+        int:
+            $cont = contador que puede incrementar su valor
+            $puntaje = puntaje del 0 al 24 según el rendimiento del jugador
+        
+        string:
+            $palabraWordix = palabra de la colección de palabras
+            $jugador = jugador de la colección de jugadores
+    */
+
     $coleccionPartidas = [];
 
-    // Asignar las palabras y los datos dentro del arreglo coleccionPartidas
-    $coleccionPartidas[0] = ["palabraWordix" => "GATOS", "jugador" => "joaquin", "puntaje" => 0];
-    $coleccionPartidas[1] = ["palabraWordix" => "MOUSE", "jugador" => "ana", "puntaje" => 5];
-    $coleccionPartidas[2] = ["palabraWordix" => "TECLA", "jugador" => "pedro", "puntaje" => 10];
-    $coleccionPartidas[3] = ["palabraWordix" => "SOLAR", "jugador" => "luisa", "puntaje" => 8];
-    $coleccionPartidas[4] = ["palabraWordix" => "LARGO", "jugador" => "carla", "puntaje" => 3];
-    $coleccionPartidas[5] = ["palabraWordix" => "CIELO", "jugador" => "juan", "puntaje" => 12];
-    $coleccionPartidas[6] = ["palabraWordix" => "NUEVO", "jugador" => "lucas", "puntaje" => 7];
-    $coleccionPartidas[7] = ["palabraWordix" => "ARBOL", "jugador" => "maria", "puntaje" => 15];
-    $coleccionPartidas[8] = ["palabraWordix" => "VIAJE", "jugador" => "pedro", "puntaje" => 6];
-    $coleccionPartidas[9] = ["palabraWordix" => "SALTA", "jugador" => "marta", "puntaje" => 9];
-    $coleccionPartidas[10] = ["palabraWordix" => "FRUTA", "jugador" => "camila", "puntaje" => 4];
-    $coleccionPartidas[11] = ["palabraWordix" => "CIEGA", "jugador" => "roberto", "puntaje" => 11];
-    $coleccionPartidas[12] = ["palabraWordix" => "PUNTO", "jugador" => "jorge", "puntaje" => 2];
-    $coleccionPartidas[13] = ["palabraWordix" => "VODKA", "jugador" => "diana", "puntaje" => 1];
-    $coleccionPartidas[14] = ["palabraWordix" => "ARBOL", "jugador" => "luis", "puntaje" => 13];
-    $coleccionPartidas[15] = ["palabraWordix" => "CAMPO", "jugador" => "marcos", "puntaje" => 14];
+    for( $cont = 1; $cont <=$cantPartidas; $cont++ ){
 
-    // Retorna el arreglo con todas las partidas
+        $palabraWordix = $coleccionPalabras[ array_rand( $coleccionPalabras ) ];
+        $jugador = $coleccionJugadores[ array_rand( $coleccionJugadores ) ];
+        $puntaje = rand( 0, 24 );
+
+        $coleccionPartidas[] = [
+            "palabraWordix" => $palabraWordix,
+            "jugador" => $jugador,
+            "puntaje" => $puntaje
+        ];
+    };
+
+    // Retorna el arreglo con todas las partidas ya cargadas
     return $coleccionPartidas;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
