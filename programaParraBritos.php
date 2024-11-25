@@ -13,6 +13,7 @@ include_once("wordix.php");
 /****** DECLARACIÓN DE ARRAYS *********/
 /**************************************/
 
+/*********** FUNCION 1  **************/
 /*
  * Funcion que obtiene un arreglo indexado de una colección de palabras
  * @RETURN ARRAY
@@ -22,15 +23,14 @@ function cargarColeccionPalabras(){
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
         "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
-        "TENIS", "POLLO", "VERDE", "ARBOL", "JAMON",
-        "TECLA", "HORAS", "PATOS", "VODKA", "MOUSE",
-        "SOLAR", "LARGO", "CIELO", "NUEVO", "VIAJE",
-        "SALTA", "FRUTA", "CIEGA", "PUNTO", "CAMPO"
+        "TENIS", "POLLO", "LLAVE", "ARBOL", "JAMON",
+        "TECLA", "HORAS", "PATOS", "VODKA"
     ];
 
     return $coleccionPalabras;
 }
 
+/*********** FUNCION 2  **************/
 /*
  * Funcion que obtiene una arreglo multidimensional de las partidas ya jugadas
  * @RETURN ARRAY
@@ -39,27 +39,32 @@ function cargarPartidas()
 {
     $coleccionPartidas = [];
     // Asignar las palabras y los datos dentro del arreglo coleccionPartidas
-    $coleccionPartidas[0] = ["palabraWordix" => "GATOS", "jugador" => "joaquin", "puntaje" => 0];
-    $coleccionPartidas[1] = ["palabraWordix" => "MOUSE", "jugador" => "ana", "puntaje" => 5];
-    $coleccionPartidas[2] = ["palabraWordix" => "TECLA", "jugador" => "pedro", "puntaje" => 10];
-    $coleccionPartidas[3] = ["palabraWordix" => "SOLAR", "jugador" => "luisa", "puntaje" => 8];
-    $coleccionPartidas[4] = ["palabraWordix" => "LARGO", "jugador" => "carla", "puntaje" => 3];
-    $coleccionPartidas[5] = ["palabraWordix" => "CIELO", "jugador" => "juan", "puntaje" => 12];
-    $coleccionPartidas[6] = ["palabraWordix" => "NUEVO", "jugador" => "lucas", "puntaje" => 7];
-    $coleccionPartidas[7] = ["palabraWordix" => "ARBOL", "jugador" => "maria", "puntaje" => 15];
-    $coleccionPartidas[8] = ["palabraWordix" => "VIAJE", "jugador" => "pedro", "puntaje" => 6];
-    $coleccionPartidas[9] = ["palabraWordix" => "SALTA", "jugador" => "marta", "puntaje" => 9];
-    $coleccionPartidas[10] = ["palabraWordix" => "FRUTA", "jugador" => "camila", "puntaje" => 4];
-    $coleccionPartidas[11] = ["palabraWordix" => "CIEGA", "jugador" => "roberto", "puntaje" => 11];
-    $coleccionPartidas[12] = ["palabraWordix" => "PUNTO", "jugador" => "pedro", "puntaje" => 2];
-    $coleccionPartidas[13] = ["palabraWordix" => "VODKA", "jugador" => "diana", "puntaje" => 1];
-    $coleccionPartidas[14] = ["palabraWordix" => "ARBOL", "jugador" => "luis", "puntaje" => 13];
-    $coleccionPartidas[15] = ["palabraWordix" => "CAMPO", "jugador" => "joaquin", "puntaje" => 14];
+    $coleccionPartidas[0] = ["palabraWordix" => "GATOS", "jugador" => "joaquin", "intentos" => 2, "puntaje" => 0];
+    $coleccionPartidas[1] = ["palabraWordix" => "MOUSE", "jugador" => "ana", "intentos" => 3, "puntaje" => 5];
+    $coleccionPartidas[2] = ["palabraWordix" => "TECLA", "jugador" => "pedro", "intentos" => 4, "puntaje" => 10];
+    $coleccionPartidas[3] = ["palabraWordix" => "SOLAR", "jugador" => "luisa", "intentos" => 5, "puntaje" => 8];
+    $coleccionPartidas[4] = ["palabraWordix" => "LARGO", "jugador" => "carla", "intentos" => 6, "puntaje" => 3];
+    $coleccionPartidas[5] = ["palabraWordix" => "CIELO", "jugador" => "juan", "intentos" => 1, "puntaje" => 12];
+    $coleccionPartidas[6] = ["palabraWordix" => "NUEVO", "jugador" => "lucas", "intentos" => 6, "puntaje" => 7];
+    $coleccionPartidas[7] = ["palabraWordix" => "ARBOL", "jugador" => "maria", "intentos" => 3, "puntaje" => 15];
+    $coleccionPartidas[8] = ["palabraWordix" => "VIAJE", "jugador" => "pedro", "intentos" => 2, "puntaje" => 6];
+    $coleccionPartidas[9] = ["palabraWordix" => "SALTA", "jugador" => "marta", "intentos" => 4, "puntaje" => 9];
+    $coleccionPartidas[10] = ["palabraWordix" => "FRUTA", "jugador" => "camila", "intentos" => 5, "puntaje" => 4];
+    $coleccionPartidas[11] = ["palabraWordix" => "CIEGA", "jugador" => "roberto", "intentos" => 1, "puntaje" => 11];
+    $coleccionPartidas[12] = ["palabraWordix" => "PUNTO", "jugador" => "pedro", "intentos" => 6, "puntaje" => 2];
+    $coleccionPartidas[13] = ["palabraWordix" => "VODKA", "jugador" => "diana", "intentos" => 3, "puntaje" => 1];
+    $coleccionPartidas[14] = ["palabraWordix" => "ARBOL", "jugador" => "luis", "intentos" => 5, "puntaje" => 13];
+    $coleccionPartidas[15] = ["palabraWordix" => "CAMPO", "jugador" => "joaquin", "intentos" => 4, "puntaje" => 14];
     // Retorna el arreglo con todas las partidas
     return $coleccionPartidas;
 }
 
 
+/**************************************/
+/***** DEFINICION DE FUNCIONES ********/
+/**************************************/
+
+/*********** FUNCION 3  **************/
 /*
  * Funcion que muestra menu de opciones  que el usuario puede seleccionar
  * @RETURN INT
@@ -82,6 +87,8 @@ function seleccionarOpcion()
 return ($opcion);
 }
 
+/*********** FUNCION 6 (PARTE 1) **************/
+
 /*
  * Funcion que solicita al usuario ingresar un numero de partida
  * @PARAM ARRAY $coleccionPartidas
@@ -99,6 +106,8 @@ function solicitarNumeroPartida($coleccionPartidas){
 return $numeroPartida;
 
 }
+
+/*********** FUNCION 6 (PARTE 2 -FINAL)  **************/
 
 /*
  * funcion que muestra los datos de una partida jugada
@@ -130,6 +139,9 @@ function mostrarPartida($numeroPartida, $coleccionPartidas){
     return $mensaje;
 }
 
+
+/*********** FUNCION 7  **************/
+
 /*
  * funcion que permite agregar una palabra (elemento) a la coleccion de palabras
  * @PARAM STRING $palabra = leerPalabra5Letras()
@@ -155,6 +167,7 @@ function agregarPalabra($palabra,$coleccionPalabras){
 }
 
 
+/*********** FUNCION 8 (PARTE 1)  **************/
 
 /*
  * Funcion que  pide al usuario , ingresar su nombre de jugador. 
@@ -179,6 +192,9 @@ function solicitarJugador()
     $nombreUsuario = strtolower($nombreUsuario); // strtolower() convierte en minúsculas la palabra
     return $nombreUsuario;
 }
+
+
+/*********** FUNCION 8 (PARTE 2 - FINAL)  **************/
 
 /*
  * Funcion que busca la primera partida ganada de un usuario y devuelve el indice de la partida. 
@@ -212,11 +228,6 @@ function primeraPartidaGanada($partidasPredefinidas, $nombreUsuario)
     return $indice;
 }
 
-
-
-/**************************************/
-/***** DEFINICION DE FUNCIONES ********/
-/**************************************/
 
 
 

@@ -421,6 +421,7 @@ function obtenerPuntajeWordix($intentos, $palabra)
 
     if ($puntaje > 0) { //Para determinar el puntaje según la letra
         $palabraSeparada = str_split($palabra);  //str_split() dividide una cadena (string) en un arreglo de caracteres.
+        $abcededario = [];
         $abecedario[0] = ["A", "E", "I", "O", "U",];
         $abecedario[1] = ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M"];
         $abecedario[2] = ["N", "Ñ", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"];
