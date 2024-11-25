@@ -13,9 +13,9 @@ include_once("wordix.php");
 /****** DECLARACIÓN DE ARRAYS *********/
 /**************************************/
 
-/**
- * Obtiene una colección de palabras
- * @return array
+/*
+ * Funcion que obtiene un arreglo indexado de una colección de palabras
+ * @RETURN ARRAY
 */
 function cargarColeccionPalabras(){
     $coleccionPalabras = [
@@ -31,104 +31,142 @@ function cargarColeccionPalabras(){
     return $coleccionPalabras;
 }
 
-/**
- * Obtiene una colección de jugadores
- * @return array
-*/
-function cargarColeccionJugadores(){
-    $coleccionJugadores = [
-        "Joaquin", "Ana", "Pedro", "Luisa",
-        "Carla", "Juan", "Lucas", "Maria",
-        "Pedro", "Marta", "Camila", "Roberto",
-        "Jorge", "Diana", "Luis", "Marcos"
-    ];
-
-    return $coleccionJugadores;
-}
-
-/**
- * Obtiene las opciones disponibles
- * @return array
-*/
-function opcionesDisponibles(){
-    $opciones = [
-        "Jugar Wordix con una palabra elegida",
-        "Jugar Wordix con una palabra aleatoria",
-        "Mostrar una partida",
-        "Mostrar la primera partida ganadora",
-        "Mostar resumen del jugador",
-        "Mostrar listado de partidas ordenadas por jugador y por palabra",
-        "Agregar una palabra de 5 letras a Wordix",
-        "Salir"
-    ];
-
-    return $opciones;
-}
-
-/**
- * Obtiene una coleccion de partidas ya jugadas
- * @param int $cantPartidas = cantidad de partidas que quiero generar
- * @param array $coleccionPalabras = array de palabras Wordix
- * @param array $coleccionJugadores = arra de jugadores registrados
- * @return array
-*/
-
-function cargarPartidas( $cantPartidas, $coleccionPalabras, $coleccionJugadores ){
-    /*
-        int:
-            $cont = contador que puede incrementar su valor
-            $puntaje = puntaje del 0 al 24 según el rendimiento del jugador
-        
-        string:
-            $palabraWordix = palabra de la colección de palabras
-            $jugador = jugador de la colección de jugadores
-    */
-
+/*
+ * Funcion que obtiene una arreglo multidimensional de las partidas ya jugadas
+ * @RETURN ARRAY
+ */
+function cargarPartidas()
+{
     $coleccionPartidas = [];
-
-    for( $cont = 1; $cont <=$cantPartidas; $cont++ ){
-
-        $palabraWordix = $coleccionPalabras[ array_rand( $coleccionPalabras ) ];
-        $jugador = $coleccionJugadores[ array_rand( $coleccionJugadores ) ];
-        $puntaje = rand( 0, 24 );//el puntaje se da segun una norma dada, usar funcion
-
-        $coleccionPartidas[] = [
-            "palabraWordix" => $palabraWordix,
-            "jugador" => $jugador,
-            "puntaje" => $puntaje
-        ];
-    };
-
-    // Retorna el arreglo con todas las partidas ya cargadas
+    // Asignar las palabras y los datos dentro del arreglo coleccionPartidas
+    $coleccionPartidas[0] = ["palabraWordix" => "GATOS", "jugador" => "joaquin", "puntaje" => 0];
+    $coleccionPartidas[1] = ["palabraWordix" => "MOUSE", "jugador" => "ana", "puntaje" => 5];
+    $coleccionPartidas[2] = ["palabraWordix" => "TECLA", "jugador" => "pedro", "puntaje" => 10];
+    $coleccionPartidas[3] = ["palabraWordix" => "SOLAR", "jugador" => "luisa", "puntaje" => 8];
+    $coleccionPartidas[4] = ["palabraWordix" => "LARGO", "jugador" => "carla", "puntaje" => 3];
+    $coleccionPartidas[5] = ["palabraWordix" => "CIELO", "jugador" => "juan", "puntaje" => 12];
+    $coleccionPartidas[6] = ["palabraWordix" => "NUEVO", "jugador" => "lucas", "puntaje" => 7];
+    $coleccionPartidas[7] = ["palabraWordix" => "ARBOL", "jugador" => "maria", "puntaje" => 15];
+    $coleccionPartidas[8] = ["palabraWordix" => "VIAJE", "jugador" => "pedro", "puntaje" => 6];
+    $coleccionPartidas[9] = ["palabraWordix" => "SALTA", "jugador" => "marta", "puntaje" => 9];
+    $coleccionPartidas[10] = ["palabraWordix" => "FRUTA", "jugador" => "camila", "puntaje" => 4];
+    $coleccionPartidas[11] = ["palabraWordix" => "CIEGA", "jugador" => "roberto", "puntaje" => 11];
+    $coleccionPartidas[12] = ["palabraWordix" => "PUNTO", "jugador" => "pedro", "puntaje" => 2];
+    $coleccionPartidas[13] = ["palabraWordix" => "VODKA", "jugador" => "diana", "puntaje" => 1];
+    $coleccionPartidas[14] = ["palabraWordix" => "ARBOL", "jugador" => "luis", "puntaje" => 13];
+    $coleccionPartidas[15] = ["palabraWordix" => "CAMPO", "jugador" => "joaquin", "puntaje" => 14];
+    // Retorna el arreglo con todas las partidas
     return $coleccionPartidas;
+}
+
+
+/*
+ * Funcion que muestra menu de opciones  que el usuario puede seleccionar
+ * @RETURN INT
+ */
+function seleccionarOpcion()
+{// int opcion
+   echo "\n";
+   echo "\n***************************************************\n";
+   echo "Bienvenido jugador, seleccione una opción del 1 al 8: \n";
+   echo "1: Jugar con palabra elegida. \n";
+   echo "2: Jugar con palabra aleatoria. \n";
+   echo "3: Mostrar una partida. \n";
+   echo "4: Mostrar la primer partida ganada de un jugador. \n";
+   echo "5: Mostrar el resumen de un jugador. \n";
+   echo "6: Mostrar listado de partidas ordenadas por jugador y palabra. \n";
+   echo "7: Agregar una palabra a la colección de Wordix. \n";
+   echo "8: Salir de wordix. \n";
+   echo "\n***************************************************\n";
+   $opcion = solicitarNumeroEntre(1, 8); // solicitarNumeroEntre() nos cumple que sea un numero entre esos dos desde wordix.php
+   return ($opcion);
+}
+
+/*
+ * Funcion que solicita al usuario ingresar un numero de partida
+ * @PARAM ARRAY $coleccionPartidas
+ * @RETURN INT 
+ */
+
+function solicitarNumeroPartida($coleccionPartidas){
+//INT $cantPartidas, $numeroPartida
+
+    $cantPartidas = count($coleccionPartidas); // pasa la coleccion a cantidad
+    echo"Ingrese el numero de partida que desea mostrar: ";
+    $numeroPartida = solicitarNumeroEntre(1,$cantPartidas); // verifica que sea desde el 1 hasta la cantidad de partidas
+    $numeroPartida = $numeroPartida -1 ; // convierte el numero de partida en el indice para el array( siempre es -1)
+
+    return $numeroPartida;
+
+}
+
+/*
+ * funcion que muestra los datos de una partida jugada
+ * @PARAM INT $numeroPartida = solicitarNumeroPartida()
+ * @PARAM ARRAY $coleccionPartidas
+ * @RETURN STRING $mensaje
+ */
+function mostrarPartida($numeroPartida, $coleccionPartidas){
+
+    $auxNumeroPartida = $numeroPartida + 1; //pasa de tener el indice del array, a agregarle 1 para mostrar que numero de partida es
+    $palabra = $coleccionPartidas[$numeroPartida]["palabraWordix"];
+    $jugador = $coleccionPartidas[$numeroPartida]["jugador"];
+    $puntaje = $coleccionPartidas[$numeroPartida]["puntaje"];
+    $intentos = $coleccionPartidas[$numeroPartida]["intentos"];
+
+    if ($puntaje = 0) {
+        $msjIntento = "No adivinó la palabra\n";
+    } else {
+        $msjIntento = "Adivinó la palabra en " . $intentos . " intentos\n";
+    }
+
+    $mensaje =  "**************************************************************\n   
+    Partida WORDIX $auxNumeroPartida: palabra $palabra \n          
+    Jugador: $jugador \n               
+    Puntaje: $puntaje puntos \n        
+    Intento: $msjIntento
+    \n**************************************************************";
+
+    return $mensaje;
+}
+
+/*
+ * funcion que permite agregar una palabra (elemento) a la coleccion de palabras
+ * @PARAM STRING $palabra = leerPalabra5Letras()
+ * @PARAM ARRAY $coleccionPalabras 
+ * @RETURN ARRAY
+ */
+
+function agregarPalabra($palabra,$coleccionPalabras){
+
+    //in_array() recorre el array y verifica si la palabra ya esta en el arreglo
+    // si ya esta la palabra en el array, entonces in_array() devolvera true
+
+    if (in_array($palabra, $coleccionPalabras)) {
+        // Si la palabra ya existe, agregar un mensaje de error a la colección
+        $coleccionPalabras[] = "La palabra ya se encuentra almacenada.";
+    } else {
+        // Si no existe, agregarla a la colección
+        $coleccionPalabras[] = $palabra;
+    }
+    
+    // Retornar la colección (con o sin el mensaje)
+    return $coleccionPalabras;
+}
+
+
+
+
+
+
+
 }
 
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
-/**
- * Muestra menu de opciones disponibles
- * @param array $opcionesDisponibles = opciones disponibles para que el usuario elija
- * @return int
-*/
-function seleccionarOpcion( $opcionesDisponibles ){
-    /*
-        int:
-            $cont = contador que puede incrementar su valor
-            $opciónElegida = número de opción elegida por el usuario
-    */
-    
-    echo "Seleccionar opción: \n";
 
-    for( $cont = 1; $cont <= count( $opcionesDisponibles ); $cont++ ){
-        echo "[$cont] " . $opcionesDisponibles[ $cont - 1 ] . "\n";
-    };
-
-    $opcionElegida = solicitarNumeroEntre(1, 8); //Función de wordix.php
-
-    return $opcionElegida;
-}
 
 
 
