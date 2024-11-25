@@ -66,20 +66,20 @@ function cargarPartidas()
  */
 function seleccionarOpcion()
 {// int opcion
-   echo "\n";
-   echo "\n***************************************************\n";
-   echo "Bienvenido jugador, seleccione una opción del 1 al 8: \n";
-   echo "1: Jugar con palabra elegida. \n";
-   echo "2: Jugar con palabra aleatoria. \n";
-   echo "3: Mostrar una partida. \n";
-   echo "4: Mostrar la primer partida ganada de un jugador. \n";
-   echo "5: Mostrar el resumen de un jugador. \n";
-   echo "6: Mostrar listado de partidas ordenadas por jugador y palabra. \n";
-   echo "7: Agregar una palabra a la colección de Wordix. \n";
-   echo "8: Salir de wordix. \n";
-   echo "\n***************************************************\n";
-   $opcion = solicitarNumeroEntre(1, 8); // solicitarNumeroEntre() nos cumple que sea un numero entre esos dos desde wordix.php
-   return ($opcion);
+    echo "\n";
+    echo "\n***************************************************\n";
+    echo "Bienvenido jugador, seleccione una opción del 1 al 8: \n";
+    echo "1: Jugar con palabra elegida. \n";
+    echo "2: Jugar con palabra aleatoria. \n";
+    echo "3: Mostrar una partida. \n";
+    echo "4: Mostrar la primer partida ganada de un jugador. \n";
+    echo "5: Mostrar el resumen de un jugador. \n";
+    echo "6: Mostrar listado de partidas ordenadas por jugador y palabra. \n";
+    echo "7: Agregar una palabra a la colección de Wordix. \n";
+    echo "8: Salir de wordix. \n";
+    echo "\n***************************************************\n";
+     $opcion = solicitarNumeroEntre(1, 8); // solicitarNumeroEntre() nos cumple que sea un numero entre esos dos desde wordix.php
+return ($opcion);
 }
 
 /*
@@ -96,7 +96,7 @@ function solicitarNumeroPartida($coleccionPartidas){
     $numeroPartida = solicitarNumeroEntre(1,$cantPartidas); // verifica que sea desde el 1 hasta la cantidad de partidas
     $numeroPartida = $numeroPartida -1 ; // convierte el numero de partida en el indice para el array( siempre es -1)
 
-    return $numeroPartida;
+return $numeroPartida;
 
 }
 
@@ -156,11 +156,63 @@ function agregarPalabra($palabra,$coleccionPalabras){
 
 
 
+/*
+ * Funcion que  pide al usuario , ingresar su nombre de jugador. 
+ * valida que comienze con una letra y lo convierte en minúsculas
+ * @RETURN STRING $nombreUsuario
+ */
+function solicitarJugador()
+{
+    //STRING $nombreUsuario, $primeraLetra
 
+    echo "Ingrese nombre de usuario: \n";
+    do {
+        $nombreUsuario = trim(fgets(STDIN));
 
+        // Verificar si el nombre tiene solo letras
+        $primeraLetra = $nombreUsuario[0];
+        if (!ctype_alpha($primeraLetra)) { // ctype_alpha() verifica si la primera letra  son letras alfabéticas (ya sean minúsculas o mayúsculas) 
+            echo "Su nombre debe comenzar con una letra, ingrese un nombre válido: \n";
+        }
+    } while (!ctype_alpha($primeraLetra));
 
-
+    $nombreUsuario = strtolower($nombreUsuario); // strtolower() convierte en minúsculas la palabra
+    return $nombreUsuario;
 }
+
+/*
+ * Funcion que busca la primera partida ganada de un usuario y devuelve el indice de la partida. 
+ * De no haber ganado ninguna, devuelve el valor -1
+ * @PARAM ARRAY $partidasPredefinidas
+ * @PARAM STRING $nombreUsuario 
+ * @RETURN INT
+ */
+function primeraPartidaGanada($partidasPredefinidas, $nombreUsuario)
+{
+    //int $indice
+    $indice = 0;
+    $partidaGanada = false ;
+    $cantPartidas = count($partidasPredefinidas);
+
+    // Iniciamos un bucle para revisar cada partida
+    while($indice < $cantPartidas && !$partidaGanada){
+
+        // Verificamos si el nombre del jugador coincide y si el puntaje es mayor que 0 (es decir, ganó la partida)
+        if ($nombreUsuario == $partidasPredefinidas[$indice]["jugador"] && $partidasPredefinidas[$indice]["puntaje"] > 0) {
+            // si partidaGanada es true sale del bulce y toma el ultimo valor del indice
+           $partidaGanada = true ;
+        } else {
+            $indice = $indice + 1;
+        }
+    }
+    // Si no se encontró ninguna partida ganada, devolvemos -1
+    if (!$partidaGanada) {
+        $indice = -1 ;
+    }
+    return $indice;
+}
+
+
 
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/

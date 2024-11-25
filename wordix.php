@@ -32,6 +32,29 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /*
+ * Funcion que inicia una estructura de datos Teclado. La estructura es de tipo asociativo
+ * @RETURN ARRAY
+ */
+function iniciarTeclado()
+{
+    //array $teclado (arreglo asociativo, cuyas claves son las letras del alfabeto)
+    $teclado = [
+        "A" => ESTADO_LETRA_DISPONIBLE, "B" => ESTADO_LETRA_DISPONIBLE, "C" => ESTADO_LETRA_DISPONIBLE, "D" => ESTADO_LETRA_DISPONIBLE, "E" => ESTADO_LETRA_DISPONIBLE,
+        "F" => ESTADO_LETRA_DISPONIBLE, "G" => ESTADO_LETRA_DISPONIBLE, "H" => ESTADO_LETRA_DISPONIBLE, "I" => ESTADO_LETRA_DISPONIBLE, "J" => ESTADO_LETRA_DISPONIBLE,
+        "K" => ESTADO_LETRA_DISPONIBLE, "L" => ESTADO_LETRA_DISPONIBLE, "M" => ESTADO_LETRA_DISPONIBLE, "N" => ESTADO_LETRA_DISPONIBLE, "Ñ" => ESTADO_LETRA_DISPONIBLE,
+        "O" => ESTADO_LETRA_DISPONIBLE, "P" => ESTADO_LETRA_DISPONIBLE, "Q" => ESTADO_LETRA_DISPONIBLE, "R" => ESTADO_LETRA_DISPONIBLE, "S" => ESTADO_LETRA_DISPONIBLE,
+        "T" => ESTADO_LETRA_DISPONIBLE, "U" => ESTADO_LETRA_DISPONIBLE, "V" => ESTADO_LETRA_DISPONIBLE, "W" => ESTADO_LETRA_DISPONIBLE, "X" => ESTADO_LETRA_DISPONIBLE,
+        "Y" => ESTADO_LETRA_DISPONIBLE, "Z" => ESTADO_LETRA_DISPONIBLE
+    ];
+    return $teclado;
+}
+
+/**************************************/
+/***** DEFINICION DE FUNCIONES ********/
+/**************************************/
+
+/*********** FUNCION 3 Y 5  **************/
+/*
  * funcion que solicita al usuario un número entero dentro de un rango específico.
  * el valor ingresado debe ser un número entero, y debe estar entre los valores de $min y $max.
  *
@@ -62,9 +85,27 @@ function solicitarNumeroEntre($min, $max)
     return $numero;
 }
 
-/**************************************/
-/***** DEFINICION DE FUNCIONES ********/
-/**************************************/
+/*********** FUNCION 4  **************/
+/*
+ * Funcion que pide al usuario ingresar palabra de 5 letras y retorna la palabra en mayuscula
+ * @RETURN STRING
+ */
+function leerPalabra5Letras()
+{
+    //STRING $palabra
+    echo "Ingrese una palabra de 5 letras: ";
+    $palabra = trim(fgets(STDIN));
+    $palabra  = strtoupper($palabra); //convierte las letras ingresadas en mayuscula
+
+    //bucle que mientras la palabra sea distinta a 5 letras o esPalabra() sea falso entonces ingresara de nuevo una palabra
+    while ((strlen($palabra) != 5) || !esPalabra($palabra)) { 
+        echo "Debe ingresar una palabra de 5 letras:";
+        $palabra = strtoupper(trim(fgets(STDIN)));
+    }
+
+    return $palabra;
+}
+
 
 /**************************************/
 /*********** PINTAR TEXTOS ************/
@@ -191,44 +232,6 @@ function esPalabra($cadena)
 }
 
 
-/*
- * Funcion que pide al usuario ingresar palabra de 5 letras y retorna la palabra en mayuscula
- * @RETURN STRING
- */
-function leerPalabra5Letras()
-{
-    //STRING $palabra
-    echo "Ingrese una palabra de 5 letras: ";
-    $palabra = trim(fgets(STDIN));
-    $palabra  = strtoupper($palabra); //convierte las letras ingresadas en mayuscula
-
-    //bucle que mientras la palabra sea distinta a 5 letras o esPalabra() sea falso entonces ingresara de nuevo una palabra
-    while ((strlen($palabra) != 5) || !esPalabra($palabra)) { 
-        echo "Debe ingresar una palabra de 5 letras:";
-        $palabra = strtoupper(trim(fgets(STDIN)));
-    }
-
-    return $palabra;
-}
-
-
-/*
- * Funcion que inicia una estructura de datos Teclado. La estructura es de tipo asociativo
- * @RETURN ARRAY
- */
-function iniciarTeclado()
-{
-    //array $teclado (arreglo asociativo, cuyas claves son las letras del alfabeto)
-    $teclado = [
-        "A" => ESTADO_LETRA_DISPONIBLE, "B" => ESTADO_LETRA_DISPONIBLE, "C" => ESTADO_LETRA_DISPONIBLE, "D" => ESTADO_LETRA_DISPONIBLE, "E" => ESTADO_LETRA_DISPONIBLE,
-        "F" => ESTADO_LETRA_DISPONIBLE, "G" => ESTADO_LETRA_DISPONIBLE, "H" => ESTADO_LETRA_DISPONIBLE, "I" => ESTADO_LETRA_DISPONIBLE, "J" => ESTADO_LETRA_DISPONIBLE,
-        "K" => ESTADO_LETRA_DISPONIBLE, "L" => ESTADO_LETRA_DISPONIBLE, "M" => ESTADO_LETRA_DISPONIBLE, "N" => ESTADO_LETRA_DISPONIBLE, "Ñ" => ESTADO_LETRA_DISPONIBLE,
-        "O" => ESTADO_LETRA_DISPONIBLE, "P" => ESTADO_LETRA_DISPONIBLE, "Q" => ESTADO_LETRA_DISPONIBLE, "R" => ESTADO_LETRA_DISPONIBLE, "S" => ESTADO_LETRA_DISPONIBLE,
-        "T" => ESTADO_LETRA_DISPONIBLE, "U" => ESTADO_LETRA_DISPONIBLE, "V" => ESTADO_LETRA_DISPONIBLE, "W" => ESTADO_LETRA_DISPONIBLE, "X" => ESTADO_LETRA_DISPONIBLE,
-        "Y" => ESTADO_LETRA_DISPONIBLE, "Z" => ESTADO_LETRA_DISPONIBLE
-    ];
-    return $teclado;
-}
 
 /*
  * Funcion que escribe en pantalla el estado del teclado. Acomoda las letras en el orden del teclado QWERTY
