@@ -83,7 +83,7 @@ function seleccionarOpcion()
     echo "7: Agregar una palabra a la colección de Wordix. \n";
     echo "8: Salir de wordix. \n";
     echo "\n***************************************************\n";
-     $opcion = solicitarNumeroEntre(1, 8); // solicitarNumeroEntre() nos cumple que sea un numero entre esos dos desde wordix.php
+    $opcion = solicitarNumeroEntre(1, 8); // solicitarNumeroEntre() nos cumple que sea un numero entre esos dos desde wordix.php
 return ($opcion);
 }
 
@@ -167,7 +167,7 @@ function agregarPalabra($palabra,$coleccionPalabras){
 }
 
 
-/*********** FUNCION 8 (PARTE 1)  **************/
+/*********** FUNCION 10 **************/
 
 /*
  * Funcion que  pide al usuario , ingresar su nombre de jugador. 
@@ -194,7 +194,7 @@ function solicitarJugador()
 }
 
 
-/*********** FUNCION 8 (PARTE 2 - FINAL)  **************/
+/*********** FUNCION 8 **************/
 
 /*
  * Funcion que busca la primera partida ganada de un usuario y devuelve el indice de la partida. 
@@ -228,7 +228,85 @@ function primeraPartidaGanada($partidasPredefinidas, $nombreUsuario)
     return $indice;
 }
 
+/*********** FUNCION 9 **************/
 
+/**
+ * Retorna el resumen de un jugador basado en la colección de partidas.
+ * @param array $coleccionPartidas
+ * @param string $nombreJugador
+ * @return array
+*/
+function obtenerResumenJugador($coleccionPartidas, $nombreJugador) {
+    // Inicializar el resumen del jugador.
+    $resumen = [
+        "jugador" => $nombreJugador,
+        "partidas" => 0,
+        "puntaje" => 0,
+        "victorias" => 0,
+        "intento1" => 0,
+        "intento2" => 0,
+        "intento3" => 0,
+        "intento4" => 0,
+        "intento5" => 0,
+        "intento6" => 0
+    ];
+
+    // Recorrer la colección de partidas.
+    foreach ($coleccionPartidas as $partida) {
+        if ($partida["jugador"] === $nombreJugador) {
+            // Incrementar el número de partidas jugadas.
+            $resumen["partidas"]++;
+
+            // Sumar el puntaje al total.
+            $resumen["puntaje"] += $partida["puntaje"];
+
+            // Si el puntaje es mayor a 0, es una victoria.
+            if ($partida["puntaje"] > 0) {
+                $resumen["victorias"]++;
+
+                // Determinar en qué intento se ganó.
+                switch ($partida["intentos"]) {
+                    case 6: $resumen["intento1"]++; break;
+                    case 5: $resumen["intento2"]++; break;
+                    case 4: $resumen["intento3"]++; break;
+                    case 3: $resumen["intento4"]++; break;
+                    case 2: $resumen["intento5"]++; break;
+                    case 1: $resumen["intento6"]++; break;
+                }
+            }
+        }
+    }
+
+    return $resumen;
+}
+
+/*********** FUNCION 11 **************/
+
+/**
+ * Muestra la colección de partidas ordenada por el nombre del jugador y luego por la palabra.
+ * @param array $coleccionPartidas Colección de partidas a ordenar y mostrar
+*/
+function mostrarPartidasOrdenadas($coleccionPartidas) {
+
+    // Ordenar la colección por jugador y palabra usando uasort
+    uasort($coleccionPartidas, function($a, $b) {
+        // Comparar por jugador
+        $comparacionJugador = strcmp($a['jugador'], $b['jugador']);
+        
+        // Si los jugadores son iguales, comparar por palabra
+        if ($comparacionJugador === 0) {
+            return strcmp($a['palabraWordix'], $b['palabraWordix']);
+        }
+        
+        // Retornar la comparación por jugador
+        return $comparacionJugador;
+    });
+
+    // Mostrar la colección ordenada
+    print_r($coleccionPartidas);
+}
+
+echo mostrarPartidasOrdenadas(cargarPartidas());
 
 
 

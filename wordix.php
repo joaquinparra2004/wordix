@@ -53,7 +53,7 @@ function iniciarTeclado()
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
-/*********** FUNCION 3 Y 5  **************/
+/*********** FUNCION 5  **************/
 /*
  * funcion que solicita al usuario un número entero dentro de un rango específico.
  * el valor ingresado debe ser un número entero, y debe estar entre los valores de $min y $max.
