@@ -306,8 +306,6 @@ function mostrarPartidasOrdenadas($coleccionPartidas) {
     print_r($coleccionPartidas);
 }
 
-echo mostrarPartidasOrdenadas(cargarPartidas());
-
 
 
 
