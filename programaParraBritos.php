@@ -44,7 +44,7 @@ if ( buscarJugador( $coleccionJugadores, $jugador ) !== -1 ){
 }
 
 //MENÚ PRINCIPAL:
-
+print_r($coleccionPartidas);
 /*Pido al usuario que elija una opcion*/
 do{
 
@@ -70,6 +70,19 @@ do{
         case 4:
 
             //mostrar la primer partida ganadora
+            echo mostrarJugadores( $coleccionJugadores );
+
+            echo "Ingresar de quien deseas ver la primer partida ganada\n";
+            $numJugador = solicitarNumeroEntre( 1, count( $coleccionJugadores ) );
+            echo "\n";
+
+            $numPrimerPartidaGanada = primeraPartidaGanada( $coleccionPartidas, $coleccionJugadores[ $numJugador - 1 ] );
+
+            if ( $numPrimerPartidaGanada == -1 ){
+                echo "el jugador " . $coleccionJugadores[ $numJugador - 1 ] . " no gano ninguna partida\n";
+            }else{
+                echo mensajeMostrarPartida( $numPrimerPartidaGanada, $coleccionPartidas[$numPrimerPartidaGanada]["palabraWordix"], $coleccionPartidas[$numPrimerPartidaGanada]["jugador"], $coleccionPartidas[$numPrimerPartidaGanada]["puntaje"], $coleccionPartidas[$numPrimerPartidaGanada]["intentos"]);
+            }
     
             break;
 

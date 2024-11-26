@@ -322,17 +322,24 @@ function mostrarPartida( $coleccionPartidas )
         $msjIntento = "Adivinó la palabra en " . $intentos . " intentos\n";
     }
 
+    echo mensajeMostrarPartida($numeroPartida, $palabra, $jugador, $puntaje, $msjIntento);
+}
+
+//****************************************************** */
+function mensajeMostrarPartida($numeroPartida, $palabra, $jugador, $puntaje, $intento){
     $mensaje =  "
         **************************************************************\n   
         Partida WORDIX $numeroPartida: palabra $palabra \n          
         Jugador: $jugador \n               
         Puntaje: $puntaje puntos \n        
-        Intento: $msjIntento
+        Intento: $intento
         **************************************************************
     ";
 
     return $mensaje;
 }
+
+/************************************************************* */
 
 /**
  * Retorna el resumen de un jugador basado en la colección de partidas.
@@ -955,7 +962,7 @@ function primeraPartidaGanada( $coleccionPartidas, $nombreUsuario )
     $cantPartidas = count( $coleccionPartidas );
 
     // Iniciamos un bucle para revisar cada partida
-    while( $indice <= $cantPartidas && !$partidaGanada ){
+    while( $indice < $cantPartidas && !$partidaGanada ){
 
         // Verificamos si el nombre del jugador coincide y si el puntaje es mayor que 0 (es decir, ganó la partida)
         if ( $nombreUsuario == $coleccionPartidas[ $indice ][ "jugador" ] && $coleccionPartidas[ $indice ][ "puntaje" ] > 0 ){
