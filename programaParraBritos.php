@@ -44,7 +44,7 @@ if ( buscarJugador( $coleccionJugadores, $jugador ) !== -1 ){
 }
 
 //MENÚ PRINCIPAL:
-
+print_r($coleccionPartidas);
 /*Pido al usuario que elija una opcion*/
 do{
 

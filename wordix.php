@@ -74,6 +74,8 @@ function cargarColeccionPalabras()
     return $coleccionPalabras;
 }
 
+
+
 /**
  * Función que obtiene un arreglo indexado de una colección de jugadores.
  * @return array $coleccionJugadores - Colección de jugadores para Wordix.
@@ -465,9 +467,13 @@ function mostrarPartidasOrdenadas( $coleccionPartidas )
     // Mostrar la colección ordenada
     echo "\n";
     foreach ( $coleccionPartidas as $partida ){
-        echo "Jugador: " . $partida[ 'jugador' ] . "\n";
+       /* echo "Jugador: " . $partida[ 'jugador' ] . "\n";
         echo "Palabra: " . $partida[ 'palabraWordix' ] . "\n";
         echo "Puntaje: " . $partida[ 'puntaje' ] . "\n";
+        echo "-----------------------------\n";
+        */
+        echo "Detalles de la partida:\n";
+        print_r($partida);
         echo "-----------------------------\n";
     }
 }
@@ -597,6 +603,45 @@ function solicitarNumeroEntre( $min, $max )
     }
     return $numero;
 }
+
+
+/**
+ * Función que muestra y solicita numero de palabra para jugar 
+ * @param $coleccionPalabras
+ * @param
+ * @return string
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Función que pide al usuario ingresar una palabra de 5 letras y retorna la palabra en mayúscula
