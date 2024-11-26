@@ -354,6 +354,7 @@ function obtenerResumenJugador( $coleccionPartidas, $nombreJugador )
         "partidas" => 0,
         "puntaje" => 0,
         "victorias" => 0,
+        "porcentajeVictorias" => 0,
         "intento1" => 0,
         "intento2" => 0,
         "intento3" => 0,
@@ -402,6 +403,11 @@ function obtenerResumenJugador( $coleccionPartidas, $nombreJugador )
                 }
             }
         }
+    }
+
+    // Calcular el porcentaje de victorias si se jugaron partidas
+    if ($resumen[ "partidas" ] > 0) {
+        $resumen[ "porcentajeVictorias" ] = round( ( $resumen[ "victorias" ] / $resumen[ "partidas" ] ) * 100, 2 );
     }
 
     return $resumen;

@@ -19,7 +19,7 @@ include_once("wordix.php");
 
 $coleccionPalabras = cargarColeccionPalabras();
 $coleccionJugadores = cargarColeccionJugadores();
-$coleccionPartidas = cargarColeccionPartidas( 2, $coleccionPalabras, $coleccionJugadores);
+$coleccionPartidas = cargarColeccionPartidas( 15, $coleccionPalabras, $coleccionJugadores);
 
 /**************************************/
 /********* PROGRAMA PRINCIPAL *********/
@@ -72,9 +72,24 @@ do{
     
             break;
 
-        case 5: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
-    
+        case 5:
+
+            //mostrar estadisticas del jugador
+            echo "\nJugadores: \n";
+            foreach ($coleccionJugadores as $indice => $jugadores) {
+                echo ($indice + 1) . ". " . $jugadores . PHP_EOL;
+            }
+            echo "\n";
+
+            echo "Ingresar de quien deseas ver el resumen\n";
+            $numJugador = solicitarNumeroEntre( 1, count( $coleccionJugadores ) );
+            echo "\n";
+
+            $resumen = obtenerResumenJugador( $coleccionPartidas, $coleccionJugadores[ $numJugador - 1 ] );
+
+            foreach ($resumen as $clave => $valor) {
+                echo "$clave: $valor\n";
+            }
             break;
 
         case 6:
