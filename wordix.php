@@ -454,6 +454,14 @@ function mostrarPartidasOrdenadas( $coleccionPartidas )
     }
 }
 
+function mostrarJugadores( $coleccionJugadores ){
+    echo "\nJugadores: \n";
+    foreach ($coleccionJugadores as $indice => $jugadores) {
+        echo ($indice + 1) . ". " . $jugadores . PHP_EOL;
+    }
+    echo "\n";
+}
+
 /**************************************/
 /*********** PINTAR TEXTOS ************/
 /**************************************/

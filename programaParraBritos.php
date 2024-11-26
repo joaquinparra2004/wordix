@@ -67,19 +67,16 @@ do{
 
             break;
 
-        case 4: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+        case 4:
+
+            //mostrar la primer partida ganadora
     
             break;
 
         case 5:
 
             //mostrar estadisticas del jugador
-            echo "\nJugadores: \n";
-            foreach ($coleccionJugadores as $indice => $jugadores) {
-                echo ($indice + 1) . ". " . $jugadores . PHP_EOL;
-            }
-            echo "\n";
+            echo mostrarJugadores( $coleccionJugadores );
 
             echo "Ingresar de quien deseas ver el resumen\n";
             $numJugador = solicitarNumeroEntre( 1, count( $coleccionJugadores ) );
