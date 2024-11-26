@@ -64,11 +64,7 @@ function cargarColeccionPalabras()
             $coleccionPalabras = colección de palabras
     */
     $coleccionPalabras = [
-        "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
-        "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
-        "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
-        "TENIS", "POLLO", "LLAVE", "ARBOL", "JAMON",
-        "TECLA", "HORAS", "PATOS", "VODKA"
+        "MUJER"
     ];
 
     return $coleccionPalabras;
@@ -896,6 +892,30 @@ function esIntentoGanado( $estructuraPalabraIntento ){
     }
 
     return $ganado;
+}
+
+/**
+ * Verifica si una palabra ya fue jugada por el jugador.
+ * @param array $coleccionPartidas - Colección de partidas jugadas
+ * @param string $jugador - Nombre del jugador
+ * @param string $palabra - Palabra wordix seleccionada
+ * @return bool - True si la palabra ya fue jugada, False en caso contrario
+ */
+function palabraYaJugada( $coleccionPartidas, $jugador, $palabra )
+{
+    /*
+        array:
+            $partida = almacena los valores de $coleccionPartida
+    */
+
+    foreach ( $coleccionPartidas as $partida ){
+
+        // Verificar si el jugador ya jugó con esta palabra
+        if ( $partida[ 'jugador' ] === $jugador && $partida[ 'palabraWordix' ] === $palabra ) {
+            return true; // La palabra ya fue jugada
+        }
+    }
+    return false; // La palabra no fue jugada
 }
 
 /**

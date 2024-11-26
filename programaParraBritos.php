@@ -61,8 +61,26 @@ do{
         case 2: 
 
             //jugar wordix con una palabra aleatoria
-            $coleccionPartidas[] = jugarWordix( $coleccionPalabras[ array_rand( $coleccionPalabras ) ], $jugador);
+            $i = 0;
+            $totalPalabras = count($coleccionPalabras);
 
+            do {
+
+                $palabraSeleccionada = $coleccionPalabras[ array_rand( $coleccionPalabras ) ];
+                $i++;
+
+                // Si todos los intentos fallan, salir del bucle
+                if ($i > $totalPalabras) {
+
+                    echo "¡El jugador $jugador ya ha jugado con todas las palabras disponibles!\n";
+                    break;
+                }
+            } while( palabraYaJugada( $coleccionPartidas, $jugador, $palabraSeleccionada ) );
+
+            if ($i <= $totalPalabras) {
+                $coleccionPartidas[] = jugarWordix($palabraSeleccionada, $jugador);
+            }
+            
             break;
 
         case 3: 
@@ -119,25 +137,3 @@ do{
            break;
     }
 }while( $opcion != 8);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//$partida = jugarWordix("MELON", strtolower("MaJo"));
-//print_r($partida);
-//imprimirResultado($partida);
