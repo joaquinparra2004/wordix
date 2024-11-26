@@ -14,13 +14,35 @@
 include_once("wordix.php");
 
 /**************************************/
-/*********** PROGRAMA PRINCIPAL *******/
+/***** Inicialización de variables ****/
 /**************************************/
 
-//Declaración de variables:
+$coleccionPalabras = cargarColeccionPalabras();
+$coleccionJugadores = cargarColeccionJugadores();
+$coleccionPartidas = cargarColeccionPartidas( 12, $coleccionPalabras, $coleccionJugadores);
+
+/**************************************/
+/********* PROGRAMA PRINCIPAL *********/
+/**************************************/
 
 
-//Inicialización de variables:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //Proceso:
