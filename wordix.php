@@ -150,7 +150,7 @@ function cargarColeccionPartidas( $cantidadPartidas, $coleccionPalabras, $colecc
 function escribirMensajeBienvenida( $usuario )
 {
     echo "***************************************************\n";
-    echo "  Hola ";
+    echo "  HolaAAA ";
     escribirAmarillo( $usuario );
     echo " Juguemos una PARTIDA de WORDIX! **\n";
     echo "***************************************************\n";

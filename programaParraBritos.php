@@ -43,52 +43,70 @@ if ( buscarJugador( $coleccionJugadores, $jugador ) !== -1 ){
     echo "Gracias por registrarte $jugador, nos divertiremos jugando!\n";
 }
 
+//MENÚ PRINCIPAL:
 
+/*Pido al usuario que elija una opcion*/
+do{
 
+    $opcion = seleccionarOpcion();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Proceso:
-
-//$partida = jugarWordix("MELON", strtolower("MaJo"));
-//print_r($partida);
-//imprimirResultado($partida);
-
-
-
-/*
-do {
-    $opcion = ...;
-
-    
     switch ($opcion) {
+
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
 
             break;
+
         case 2: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
 
             break;
+
         case 3: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
 
             break;
-        
-            //...
+
+        case 4: 
+            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+    
+            break;
+
+        case 5: 
+            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
+    
+            break;
+
+        case 6: 
+           //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+    
+            break;
+            
+        case 7:
+           //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+           
+           break;
     }
-} while ($opcion != X);
-*/
+}while( $opcion != 8);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//$partida = jugarWordix("MELON", strtolower("MaJo"));
+//print_r($partida);
+//imprimirResultado($partida);
