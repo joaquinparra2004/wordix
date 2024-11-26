@@ -49,6 +49,7 @@ print_r($coleccionPartidas);
 do{
 
     $opcion = seleccionarOpcion();
+    echo "\n";
 
     switch ($opcion) {
 
@@ -63,13 +64,15 @@ do{
             break;
 
         case 3: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            
+            //mostrar partida solicitada
+            mostrarPartida( $coleccionPartidas );
 
             break;
 
         case 4:
 
-            //mostrar la primer partida ganadora
+            //mostrar la primer partida ganada
             echo mostrarJugadores( $coleccionJugadores );
 
             echo "Ingresar de quien deseas ver la primer partida ganada\n";
@@ -83,7 +86,6 @@ do{
             }else{
                 echo mensajeMostrarPartida( $numPrimerPartidaGanada, $coleccionPartidas[$numPrimerPartidaGanada]["palabraWordix"], $coleccionPartidas[$numPrimerPartidaGanada]["jugador"], $coleccionPartidas[$numPrimerPartidaGanada]["puntaje"], $coleccionPartidas[$numPrimerPartidaGanada]["intentos"]);
             }
-    
             break;
 
         case 5:
