@@ -44,7 +44,7 @@ if ( buscarJugador( $coleccionJugadores, $jugador ) !== -1 ){
 }
 
 //MENÚ PRINCIPAL:
-print_r($coleccionPartidas);
+
 /*Pido al usuario que elija una opcion*/
 do{
 
@@ -59,7 +59,9 @@ do{
             break;
 
         case 2: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
+
+            //jugar wordix con una palabra aleatoria
+            $coleccionPartidas[] = jugarWordix( $coleccionPalabras[ array_rand( $coleccionPalabras ) ], $jugador);
 
             break;
 
@@ -67,7 +69,6 @@ do{
             
             //mostrar partida solicitada
             mostrarPartida( $coleccionPartidas );
-
             break;
 
         case 4:
