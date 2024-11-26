@@ -19,13 +19,29 @@ include_once("wordix.php");
 
 $coleccionPalabras = cargarColeccionPalabras();
 $coleccionJugadores = cargarColeccionJugadores();
-$coleccionPartidas = cargarColeccionPartidas( 12, $coleccionPalabras, $coleccionJugadores);
+$coleccionPartidas = cargarColeccionPartidas( 2, $coleccionPalabras, $coleccionJugadores);
 
 /**************************************/
 /********* PROGRAMA PRINCIPAL *********/
 /**************************************/
 
+echo "¡BIENVENIDO A WORDIX!\n";
 
+//LOGIN:
+
+/*Pido al usuario que se logue*/
+echo "Antes de comenzar a jugar deberás loguearte\n";
+$jugador = solicitarJugador();
+
+/*Verifico si está o no logueado*/
+if ( buscarJugador( $coleccionJugadores, $jugador ) !== -1 ){
+    
+    echo "Nos alegra tenerte de vuelta $jugador\n";
+}else{
+
+    $coleccionJugadores = agregarJugador( $coleccionJugadores, $jugador );
+    echo "Gracias por registrarte $jugador, nos divertiremos jugando!\n";
+}
 
 
 

@@ -633,18 +633,57 @@ function solicitarJugador()
     do{
         $nombreUsuario = trim( fgets( STDIN ) );
 
-        if( !preg_match( $regex, $nombreUsuario ) ){ 
-            echo "Su user debe contener solamente letras, ingrese un nombre válido: \n";
+        if( !preg_match( $regex, $nombreUsuario ) || strlen( $nombreUsuario ) > 15 ){ 
+            echo "Su user debe contener solamente letras y no sobrepasar los 14 caracteres, ingrese un nombre válido: \n";
         }
-    }while( !preg_match( $regex, $nombreUsuario ) );
+    }while( !preg_match( $regex, $nombreUsuario ) || strlen( $nombreUsuario ) > 15 );
 
     $nombreUsuario = strtolower( $nombreUsuario ); // strtolower() convierte en minúsculas la palabra
     return $nombreUsuario;
 }
 
+/**
+ * Agrega un nuevo jugador con estadisticas en 0 al array de jugadores
+ * @param array $coleccionJugadores - coleccion de jugadores
+ * @param string $jugador - user del jugador
+ * @return array - retorna la coleccion de jugadores con el nuevo jugador
+*/
+function agregarJugador($coleccionJugadores, $jugador) {
+    /*
+        array:
+            $nuevoJugador: array con las estadisticas del nuevo jugador
+    */
+    
+    array_push( $coleccionJugadores, $jugador );
+
+    return $coleccionJugadores;
+}
+
 /**************************************/
 /*********** VERIFICACIONES ***********/
 /**************************************/
+
+/**
+ * Verifica si el jugador ya está logueado o no
+ * @param array $coleccionJugadores - colección de jugadores
+ * @param string $nombreJugador - nombre del jugador
+ * @return int - indice en el que se encuentra el jugador o si no es esta registrado es igual a -1
+*/
+function buscarJugador( $coleccionJugadores, $nombreJugador ){
+    /*
+        int:
+            $columna: numero de columna del array 
+        array:
+            $jugador: array asociativo que guarda los datos del jugador
+    */
+
+    foreach ( $coleccionJugadores as $columna => $jugador ) {
+        if ( $jugador === $nombreJugador ) {
+            return $columna;
+        }
+    }
+    return -1;
+}
 
 /**
  * Función que recorre una cadena de texto y verifica si cada carácter es una letra
