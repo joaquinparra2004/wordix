@@ -83,7 +83,12 @@ do{
             break;
             
         case 7:
-           //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+
+           //agregar una palabra de 5 letras
+           $palabra = leerPalabra5Letras();
+           $coleccionPalabras = agregarPalabra( $palabra, $coleccionPalabras );
+
+           print_r($coleccionPalabras);
            
            break;
     }

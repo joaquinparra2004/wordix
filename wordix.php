@@ -274,9 +274,11 @@ function seleccionarOpcion()
         "Salir"
     ];
 
+    echo "\n";
     for( $i = 1; $i <= 8; $i++ ) {
         echo "[$i] ".$opciones[ $i - 1 ]."\n";
     }
+    echo "\n";
 
     $opcion = solicitarNumeroEntre( 1, 8 );
 
