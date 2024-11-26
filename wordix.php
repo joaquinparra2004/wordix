@@ -325,8 +325,21 @@ function mostrarPartida( $coleccionPartidas )
     echo mensajeMostrarPartida($numeroPartida, $palabra, $jugador, $puntaje, $msjIntento);
 }
 
-//****************************************************** */
+/**
+ * Función que imprime en pantalla un resumen de la partida
+ * @param int $numeroPartida - indece de la partida encontrada
+ * @param string $palabra - palabra perteneciente a la partida
+ * @param string $jugador - jugador perteneciente a la partida
+ * @param int $puntaje - puntaje perteneciente a la partida
+ * @param int $intento - intento perteneciente a la partida
+ * @return string mensaje - resumen de la partida
+*/
 function mensajeMostrarPartida($numeroPartida, $palabra, $jugador, $puntaje, $intento){
+    /*
+        string:
+            mensaje que se muestra por pantalla del resumen de la partida
+    */
+
     $mensaje =  "
         **************************************************************\n   
         Partida WORDIX $numeroPartida: palabra $palabra \n          
@@ -338,8 +351,6 @@ function mensajeMostrarPartida($numeroPartida, $palabra, $jugador, $puntaje, $in
 
     return $mensaje;
 }
-
-/************************************************************* */
 
 /**
  * Retorna el resumen de un jugador basado en la colección de partidas.
