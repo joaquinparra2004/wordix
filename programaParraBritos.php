@@ -77,19 +77,17 @@ do{
     
             break;
 
-        case 6: 
-           //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-    
-            break;
+        case 6:
+
+           //mostrar partidas ordenadas por jugador y palabra
+           echo mostrarPartidasOrdenadas($coleccionPartidas);
+           break;
             
         case 7:
 
            //agregar una palabra de 5 letras
            $palabra = leerPalabra5Letras();
            $coleccionPalabras = agregarPalabra( $palabra, $coleccionPalabras );
-
-           print_r($coleccionPalabras);
-           
            break;
     }
 }while( $opcion != 8);

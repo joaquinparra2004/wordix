@@ -439,6 +439,7 @@ function mostrarPartidasOrdenadas( $coleccionPartidas )
     });
 
     // Mostrar la colección ordenada
+    echo "\n";
     foreach ( $coleccionPartidas as $partida ){
         echo "Jugador: " . $partida[ 'jugador' ] . "\n";
         echo "Palabra: " . $partida[ 'palabraWordix' ] . "\n";
