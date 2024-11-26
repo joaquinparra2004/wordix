@@ -152,9 +152,8 @@ function cargarColeccionPartidas( $cantidadPartidas, $coleccionPalabras, $colecc
 function escribirMensajeBienvenida( $usuario )
 {
     echo "***************************************************\n";
-    echo "  HolaAAA ";
-    escribirAmarillo( $usuario );
-    echo " Juguemos una PARTIDA de WORDIX! **\n";
+    echo " Juguemos una PARTIDA de WORDIX ";
+    echo escribirAmarillo( $usuario ) ."! \n";
     echo "***************************************************\n";
 }
 
@@ -374,13 +373,13 @@ function obtenerResumenJugador( $coleccionPartidas, $nombreJugador )
         "partidas" => 0,
         "puntaje" => 0,
         "victorias" => 0,
-        "porcentajeVictorias" => 0,
-        "intento1" => 0,
-        "intento2" => 0,
-        "intento3" => 0,
-        "intento4" => 0,
-        "intento5" => 0,
-        "intento6" => 0
+        "porcentaje Victorias" => 0,
+        "intento 1" => 0,
+        "intento 2" => 0,
+        "intento 3" => 0,
+        "intento 4" => 0,
+        "intento 5" => 0,
+        "intento 6" => 0
     ];
 
     // Recorrer la colección de partidas.
@@ -403,22 +402,22 @@ function obtenerResumenJugador( $coleccionPartidas, $nombreJugador )
                 switch( $partida[ "intentos" ] ){
 
                     case 6:
-                        $resumen[ "intento1" ]++;
+                        $resumen[ "intento 1" ]++;
                         break;
                     case 5:
-                        $resumen[ "intento2" ]++;
+                        $resumen[ "intento 2" ]++;
                         break;
                     case 4:
-                        $resumen[ "intento3" ]++;
+                        $resumen[ "intento 3" ]++;
                         break;
                     case 3:
-                        $resumen[ "intento4" ]++;
+                        $resumen[ "intento 4" ]++;
                         break;
                     case 2:
-                        $resumen[ "intento5" ]++;
+                        $resumen[ "intento 5" ]++;
                         break;
                     case 1:
-                        $resumen[ "intento6" ]++;
+                        $resumen[ "intento 6" ]++;
                         break;
                 }
             }
@@ -427,7 +426,7 @@ function obtenerResumenJugador( $coleccionPartidas, $nombreJugador )
 
     // Calcular el porcentaje de victorias si se jugaron partidas
     if ($resumen[ "partidas" ] > 0) {
-        $resumen[ "porcentajeVictorias" ] = round( ( $resumen[ "victorias" ] / $resumen[ "partidas" ] ) * 100, 2 );
+        $resumen[ "porcentaje Victorias" ] = round( ( $resumen[ "victorias" ] / $resumen[ "partidas" ] ) * 100, 2 ). "%";
     }
 
     return $resumen;
@@ -467,7 +466,7 @@ function mostrarPartidasOrdenadas( $coleccionPartidas )
     // Mostrar la colección ordenada
     echo "\n";
     foreach ( $coleccionPartidas as $partida ){
-       /* echo "Jugador: " . $partida[ 'jugador' ] . "\n";
+        /* echo "Jugador: " . $partida[ 'jugador' ] . "\n";
         echo "Palabra: " . $partida[ 'palabraWordix' ] . "\n";
         echo "Puntaje: " . $partida[ 'puntaje' ] . "\n";
         echo "-----------------------------\n";
@@ -708,7 +707,8 @@ function solicitarJugador()
 
     $regex = "/^[a-zA-Z]+$/";
 
-    echo "Ingrese nombre de usuario: \n***solamente caracteres alfabéticos***\n";
+    echo "Ingrese nombre de usuario: \n";
+    echo escribirRojo( "***solamente caracteres alfabéticos***" ) . "\n";
 
     do{
         $nombreUsuario = trim( fgets( STDIN ) );
@@ -988,7 +988,7 @@ function obtenerPuntajeWordix( $intentos, $palabraWordix )
     */
 
     if ( $intentos <= 6 ) {
-        $puntaje = 7 - $intentos;
+        $puntaje = CANT_INTENTOS - $intentos;
     } 
     else {
         $puntaje = 0; //sino puntaje es 0
@@ -1005,7 +1005,7 @@ function obtenerPuntajeWordix( $intentos, $palabraWordix )
         for ( $i = 0; $i < 5; $i++ ) {
 
             //in_array verificar si la letra existe dentro deL arreglo $abcededario
-            if ( in_array( $palabraWordix[ $i ], $abecedario[ 0 ] ) ) {
+            if ( in_array( $palabraSeparada[ $i ], $abecedario[ 0 ] ) ) {
                 $puntaje = $puntaje + 1; // si la letra esta en el abcedario 0 , suma 1 puntos
             } 
             else if ( in_array( $palabraSeparada[ $i ], $abecedario[ 1 ] ) ) {

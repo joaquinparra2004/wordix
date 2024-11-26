@@ -25,12 +25,13 @@ $coleccionPartidas = cargarColeccionPartidas( 15, $coleccionPalabras, $coleccion
 /********* PROGRAMA PRINCIPAL *********/
 /**************************************/
 
-echo "¡BIENVENIDO A WORDIX!\n";
+echo "\n";
+echo escribirVerde( "¡BIENVENIDO A WORDIX!" ) . "\n";
 
 //LOGIN:
 
 /*Pido al usuario que se logue*/
-echo "Antes de comenzar a jugar deberás loguearte\n";
+echo "\nAntes de comenzar a jugar deberás loguearte\n";
 $jugador = solicitarJugador();
 
 /*Verifico si está o no logueado*/
@@ -44,7 +45,7 @@ if ( buscarJugador( $coleccionJugadores, $jugador ) !== -1 ){
 }
 
 //MENÚ PRINCIPAL:
-print_r($coleccionPartidas);
+
 /*Pido al usuario que elija una opcion*/
 do{
 
@@ -58,7 +59,7 @@ do{
             //jugar wordix con una palabra elegida
             $totalPalabras = count($coleccionPalabras);
 
-            echo "En total hay $totalPalabras disponibles para jugar\n";
+            echo "En total hay $totalPalabras palabras disponibles para jugar\n";
             echo "Ingresar número de palabra para jugar\n";
             $numPalabraSeleccionada = solicitarNumeroEntre( 1, $totalPalabras );
 
@@ -74,6 +75,7 @@ do{
 
             //jugar wordix con una palabra aleatoria
             $i = 0;
+            $totalPalabras = count($coleccionPalabras);
 
             do {
 
@@ -137,14 +139,14 @@ do{
         case 6:
 
            //mostrar partidas ordenadas por jugador y palabra
-           echo mostrarPartidasOrdenadas($coleccionPartidas);
-           break;
+            echo mostrarPartidasOrdenadas($coleccionPartidas);
+            break;
             
         case 7:
 
            //agregar una palabra de 5 letras
-           $palabra = leerPalabra5Letras();
-           $coleccionPalabras = agregarPalabra( $palabra, $coleccionPalabras );
-           break;
+            $palabra = leerPalabra5Letras();
+            $coleccionPalabras = agregarPalabra( $palabra, $coleccionPalabras );
+            break;
     }
 }while( $opcion != 8);
