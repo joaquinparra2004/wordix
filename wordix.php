@@ -944,6 +944,30 @@ function esIntentoGanado( $estructuraPalabraIntento ){
 }
 
 /**
+ * Verifica si una palabra ya fue jugada por el jugador.
+ * @param array $coleccionPartidas - Colección de partidas jugadas
+ * @param string $jugador - Nombre del jugador
+ * @param string $palabra - Palabra wordix seleccionada
+ * @return bool - True si la palabra ya fue jugada, False en caso contrario
+ */
+function palabraYaJugada( $coleccionPartidas, $jugador, $palabra )
+{
+    /*
+        array:
+            $partida = almacena los valores de $coleccionPartida
+    */
+
+    foreach ( $coleccionPartidas as $partida ){
+
+        // Verificar si el jugador ya jugó con esta palabra
+        if ( $partida[ 'jugador' ] === $jugador && $partida[ 'palabraWordix' ] === $palabra ) {
+            return true; // La palabra ya fue jugada
+        }
+    }
+    return false; // La palabra no fue jugada
+}
+
+/**
  * Función que obtiene el puntaje de un jugador a partir de los intentos realizados y de la palabra wordix
  * @param int $intentos - intentos del jugador por adivinar la palabra wordix
  * @param string $palabraWordix - palabra wordix
