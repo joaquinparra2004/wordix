@@ -443,7 +443,7 @@ function mostrarPartidasOrdenadas( $coleccionPartidas )
     */
 
     // Ordenar la colección por jugador y palabra usando uasort
-    //uasort ordena un arreglo asociativo según la lógica definida, en este caso "function ($a, $b)"
+    //uasort ordena un arreglo asociativo de forma ascendente según la lógica definida, en este caso "function ($a, $b)"
     uasort( $coleccionPartidas, function( $a, $b ){
 
         // Comparar por jugador
@@ -471,7 +471,7 @@ function mostrarPartidasOrdenadas( $coleccionPartidas )
 function mostrarJugadores( $coleccionJugadores ){
     echo "\nJugadores: \n";
     foreach ($coleccionJugadores as $indice => $jugadores) {
-        echo ($indice + 1) . ". " . $jugadores . PHP_EOL;
+        echo ($indice + 1) . ". " . $jugadores . "\n";
     }
     echo "\n";
 }
@@ -630,7 +630,7 @@ function agregarPalabra( $palabra, $coleccionPalabras )
 {
     $palabra = strtoupper( $palabra );
 
-    //in_array() recorre el array y verifica si la palabra ya esta en el arreglo. Si lo está devolverá true
+    //in_array($palabra ingresada, $array ingresado) recorre el array y verifica si la palabra ya esta en el arreglo. Si lo está devolverá true
     if( in_array( $palabra, $coleccionPalabras ) ){
 
         // Si la palabra ya existe, agregar un mensaje de error a la colección
@@ -788,7 +788,7 @@ function analizarPalabraIntento( $palabraWordix, $estruturaIntentosWordix, $pala
     for ( $i = 0; $i < $cantCaracteres; $i++ ) {  
 
         $letraIntento = $palabraIntento[ $i ]; // Tomamos la letra en la posición $i de la palabra intento
-        $posicion = strpos( $palabraWordix, $letraIntento );  // Buscamos la posición de la letra en la palabra correcta
+        $posicion = strpos( $palabraWordix, $letraIntento );  // strpos('Hello, World!', 'World')
 
         //le asignamos un estado a cada letra de la palabra intento
         if ( $posicion === false ) {
@@ -954,7 +954,7 @@ function obtenerPuntajeWordix( $intentos, $palabraWordix )
     };
 
     if ( $puntaje > 0 ) { //Para determinar el puntaje según la letra
-        $palabraSeparada = str_split($palabraWordix);  //str_split() dividide una cadena (string) en un arreglo de caracteres.
+        $palabraSeparada = str_split($palabraWordix);  //str_split() dividide una cadena (string) en un arreglo de caracteres. "hola" = "h","o","l","a"
         $abecedario = [];
         $abecedario[ 0 ] = [ "A", "E", "I", "O", "U" ];
         $abecedario[ 1 ] = [ "B", "C", "D", "F", "G", "H", "J", "K", "L", "M" ];
