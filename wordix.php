@@ -285,7 +285,6 @@ function seleccionarOpcion()
 /**
  * Función que muestra los datos de una partida jugada
  * @param array $coleccionPartidas = colección de partidas
- * @return string $mensaje = resumen de la partida
 */
 function mostrarPartida( $coleccionPartidas )
 {
@@ -818,7 +817,6 @@ function analizarPalabraIntento( $palabraWordix, $estruturaIntentosWordix, $pala
  * de ESTADO_LETRA_PERTENECE a ESTADO_LETRA_ENCONTRADA
  * @param array $teclado - teclado
  * @param array $estructuraPalabraIntento - estructura palabra intento
- * 
  * @return array $teclado - el teclado modificado con los cambios de estados.
 */
 function actualizarTeclado( $teclado, $estructuraPalabraIntento )
