@@ -123,7 +123,7 @@ function cargarColeccionPartidas( $cantidadPartidas, $coleccionPalabras, $colecc
 
         $palabraWordix = $coleccionPalabras[ array_rand( $coleccionPalabras ) ];
         $jugador = $coleccionJugadores[ array_rand( $coleccionJugadores ) ];
-        $intentos = rand( 1, 7 );
+        $intentos = rand( 1, 6 );
         $puntaje = obtenerPuntajeWordix( $intentos, $palabraWordix );
 
         $coleccionPartidas[] = [
@@ -427,33 +427,43 @@ function obtenerResumenJugador( $coleccionPartidas, $nombreJugador )
     return $resumen;
 }
 
-/** 
+/**
  * Muestra la colección de partidas ordenada por el nombre del jugador y luego por la palabra.
- * La función ordena las partidas primero por el nombre del jugador (de forma alfabética),
- * y si los jugadores son iguales, luego ordena por la palabra jugada (también de forma alfabética).
- * Después, imprime los detalles de las partidas ordenadas.
- * 
- * @param array $coleccionPartidas Colección de partidas a ordenar y mostrar.
- * @return void No devuelve ningún valor, solo muestra los detalles ordenados.
- */
-function mostrarPartidasOrdenadas($coleccionPartidas)
+ * @param array $coleccionPartidas Colección de partidas a ordenar y mostrar
+*/
+function mostrarPartidasOrdenadas( $coleccionPartidas )
 {
-    // Ordenar las partidas por nombre de jugador y luego por palabra jugada
-    uasort($coleccionPartidas, function($a, $b) {
-        // Comparar por el nombre del jugador
-        $comparacionJugador = strcmp($a['jugador'], $b['jugador']); //strcmp() compara  dos palabras son iguales
+    /*
+        array:
+            $a, $b = almacenan los valores dados de $coleccionPartidas
+            $partida = almacena los valores de $coleccionPartidas
         
-        // Si los jugadores son iguales, comparar por la palabra jugada
-        return $comparacionJugador === 0 
-            ? strcmp($a['palabraWordix'], $b['palabraWordix']) 
-            : $comparacionJugador; // si no son iguales entonces compara por jugador
+        int:
+            $comparacionJugador = si $a y $b son iguales es igual a 0. Si $a debe ir antes que $b es menor a 0. Caso contrario es mayor a 0
+    */
+
+    // Ordenar la colección por jugador y palabra usando uasort
+    //uasort ordena un arreglo asociativo según la lógica definida, en este caso "function ($a, $b)"
+    uasort( $coleccionPartidas, function( $a, $b ){
+
+        // Comparar por jugador
+        $comparacionJugador = strcmp( $a[ 'jugador' ], $b[ 'jugador' ] );//strcmp compara los strings proporcionados
+        
+        // Si los jugadores son iguales, comparar por palabra
+        if( $comparacionJugador === 0 ){
+            return strcmp( $a[ 'palabraWordix' ], $b[ 'palabraWordix' ] );
+        }
+        
+        // Retornar la comparación por jugador
+        return $comparacionJugador;
     });
 
-    // Mostrar las partidas ordenadas
+    // Mostrar la colección ordenada
     echo "\n";
-    foreach ($coleccionPartidas as $partida) {
+    foreach ( $coleccionPartidas as $partida ){
         echo "Detalles de la partida:\n";
         print_r($partida);
+        echo "-----------------------------\n";
     }
 }
 
