@@ -441,20 +441,19 @@ function mostrarPartidasOrdenadas($coleccionPartidas)
     // Ordenar las partidas por nombre de jugador y luego por palabra jugada
     uasort($coleccionPartidas, function($a, $b) {
         // Comparar por el nombre del jugador
-        $comparacionJugador = strcmp($a['jugador'], $b['jugador']);
+        $comparacionJugador = strcmp($a['jugador'], $b['jugador']); //strcmp() compara  dos palabras son iguales
         
         // Si los jugadores son iguales, comparar por la palabra jugada
         return $comparacionJugador === 0 
-            ? strcmp($a['palabraWordix'], $b['palabraWordix']) // strcmp() compara si las dos palabras son iguales
-            : $comparacionJugador; // sino compara por jugador
+            ? strcmp($a['palabraWordix'], $b['palabraWordix']) 
+            : $comparacionJugador; // si no son iguales entonces compara por jugador
     });
 
     // Mostrar las partidas ordenadas
     echo "\n";
     foreach ($coleccionPartidas as $partida) {
-        echo "Jugador: " . $partida['jugador'] . "\n";
-        echo "Palabra: " . $partida['palabraWordix'] . "\n";
-        echo "-----------------------------\n";
+        echo "Detalles de la partida:\n";
+        print_r($partida);
     }
 }
 
@@ -998,7 +997,7 @@ function primeraPartidaGanada( $coleccionPartidas, $nombreUsuario )
         if ( $nombreUsuario == $coleccionPartidas[ $indice ][ "jugador" ] && $coleccionPartidas[ $indice ][ "puntaje" ] > 0 ){
 
             // si partidaGanada es true sale del bulce y toma el ultimo valor del indice
-           $partidaGanada = true ;
+            $partidaGanada = true ;
         } else {
             $indice++;
         }
