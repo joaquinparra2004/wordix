@@ -60,11 +60,10 @@ do{
             $totalPalabras = count($coleccionPalabras);
 
             echo "En total hay $totalPalabras palabras disponibles para jugar\n";
-            echo "Ingresar número de palabra para jugar\n";
             $numPalabraSeleccionada = solicitarNumeroEntre( 1, $totalPalabras );
 
             if ( palabraYaJugada( $coleccionPartidas, $jugador, $coleccionPalabras[ $numPalabraSeleccionada - 1 ] ) ){
-                echo "¡$jugador ya jugaste con está palabra!";
+                echo "¡$jugador ya jugaste con está palabra!, debes seleccionar un numero de palabra diferente ";
             }else{
                 $coleccionPartidas[] = jugarWordix( $coleccionPalabras[ $numPalabraSeleccionada - 1 ], $jugador );
             }
@@ -107,14 +106,14 @@ do{
             //mostrar la primer partida ganada
             echo mostrarJugadores( $coleccionJugadores );
 
-            echo "Ingresar de quien deseas ver la primer partida ganada\n";
+            echo "Ingresar el numero de usuario de quien deseas ver la primer partida ganada \n";
             $numJugador = solicitarNumeroEntre( 1, count( $coleccionJugadores ) );
             echo "\n";
 
             $numPrimerPartidaGanada = primeraPartidaGanada( $coleccionPartidas, $coleccionJugadores[ $numJugador - 1 ] );
 
             if ( $numPrimerPartidaGanada == -1 ){
-                echo "el jugador " . $coleccionJugadores[ $numJugador - 1 ] . " no gano ninguna partida\n";
+                echo "El jugador " . $coleccionJugadores[ $numJugador - 1 ] . " no gano ninguna partida\n";
             }else{
                 echo mensajeMostrarPartida( $numPrimerPartidaGanada, $coleccionPartidas[$numPrimerPartidaGanada]["palabraWordix"], $coleccionPartidas[$numPrimerPartidaGanada]["jugador"], $coleccionPartidas[$numPrimerPartidaGanada]["puntaje"], $coleccionPartidas[$numPrimerPartidaGanada]["intentos"]);
             }
@@ -125,7 +124,7 @@ do{
             //mostrar estadisticas del jugador
             echo mostrarJugadores( $coleccionJugadores );
 
-            echo "Ingresar de quien deseas ver el resumen\n";
+            echo "Ingresar el numero de usuario de quien deseas ver el resumen: \n";
             $numJugador = solicitarNumeroEntre( 1, count( $coleccionJugadores ) );
             echo "\n";
 

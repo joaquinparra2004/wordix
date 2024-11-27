@@ -138,10 +138,6 @@ function cargarColeccionPartidas( $cantidadPartidas, $coleccionPalabras, $colecc
 }
 
 /**************************************/
-/***** DEFINICION DE FUNCIONES ********/
-/**************************************/
-
-/**************************************/
 /************* MENSAJES ***************/
 /**************************************/
 
@@ -247,7 +243,7 @@ function imprimirIntentosWordix( $estructuraIntentosWordix )
         }
     }
 
-    echo "\n" . "Le quedan " . $cantIntentosFaltantes . " Intentos para adivinar la palabra!";
+    echo "\n" . "Le quedan " . $cantIntentosFaltantes . " intentos para adivinar la palabra!";
 }
 
 /**
@@ -309,7 +305,7 @@ function mostrarPartida( $coleccionPartidas )
 
     $cantPartidas = count( $coleccionPartidas );
 
-    echo "Hay en total partidas $cantPartidas jugadas\n";
+    echo "Hay un total de $cantPartidas partidas jugadas\n";
     $numeroPartida = solicitarNumeroEntre( 1, $cantPartidas );
 
     $palabra = $coleccionPartidas[ $numeroPartida - 1 ][ "palabraWordix" ];
@@ -327,7 +323,7 @@ function mostrarPartida( $coleccionPartidas )
 }
 
 /**
- * Función que imprime en pantalla un resumen de la partida
+ * Función que muestra en pantalla un resumen de la partida
  * @param int $numeroPartida - indece de la partida encontrada
  * @param string $palabra - palabra perteneciente a la partida
  * @param string $jugador - jugador perteneciente a la partida
@@ -373,7 +369,7 @@ function obtenerResumenJugador( $coleccionPartidas, $nombreJugador )
         "partidas" => 0,
         "puntaje" => 0,
         "victorias" => 0,
-        "porcentaje Victorias" => 0,
+        "porcentaje de victorias" => 0,
         "intento 1" => 0,
         "intento 2" => 0,
         "intento 3" => 0,
@@ -426,7 +422,7 @@ function obtenerResumenJugador( $coleccionPartidas, $nombreJugador )
 
     // Calcular el porcentaje de victorias si se jugaron partidas
     if ($resumen[ "partidas" ] > 0) {
-        $resumen[ "porcentaje Victorias" ] = round( ( $resumen[ "victorias" ] / $resumen[ "partidas" ] ) * 100, 2 ). "%";
+        $resumen[ "porcentaje de victorias" ] = round( ( $resumen[ "victorias" ] / $resumen[ "partidas" ] ) * 100, 2 ). "%";
     }
 
     return $resumen;
@@ -605,44 +601,6 @@ function solicitarNumeroEntre( $min, $max )
 
 
 /**
- * Función que muestra y solicita numero de palabra para jugar 
- * @param $coleccionPalabras
- * @param
- * @return string
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
  * Función que pide al usuario ingresar una palabra de 5 letras y retorna la palabra en mayúscula
  * @return string - palabra de 5 letras
 */
@@ -693,15 +651,15 @@ function agregarPalabra( $palabra, $coleccionPalabras )
 }
 
 /**
- * Funcion que  pide al usuario , ingresar su user. 
+ * Funcion que  pide al usuario , ingresar su usario
  * valida que comienze con una letra y lo convierte en minúsculas
- * @return string $nombreUsuario - user
+ * @return string $nombreUsuario - usario
 */
 function solicitarJugador()
 {
     /*
         string:
-            $nombreUsuario = user
+            $nombreUsuario = usario
             $regex = expresión regular
     */
 
@@ -714,7 +672,7 @@ function solicitarJugador()
         $nombreUsuario = trim( fgets( STDIN ) );
 
         if( !preg_match( $regex, $nombreUsuario ) || strlen( $nombreUsuario ) > 15 ){ 
-            echo "Su user debe contener solamente letras y no sobrepasar los 14 caracteres, ingrese un nombre válido: \n";
+            echo "Su usario debe contener solamente letras y no sobrepasar los 14 caracteres, ingrese un nombre válido: \n";
         }
     }while( !preg_match( $regex, $nombreUsuario ) || strlen( $nombreUsuario ) > 15 );
 
@@ -725,7 +683,7 @@ function solicitarJugador()
 /**
  * Agrega un nuevo jugador con estadisticas en 0 al array de jugadores
  * @param array $coleccionJugadores - coleccion de jugadores
- * @param string $jugador - user del jugador
+ * @param string $jugador - usario del jugador
  * @return array - retorna la coleccion de jugadores con el nuevo jugador
 */
 function agregarJugador($coleccionJugadores, $jugador) {
@@ -1041,7 +999,7 @@ function primeraPartidaGanada( $coleccionPartidas, $nombreUsuario )
     $partidaGanada = false ;
     $cantPartidas = count( $coleccionPartidas );
 
-    // Iniciamos un bucle para revisar cada partida
+    // Iniciamos un bucle  de recorrido parcial para revisar cada partida
     while( $indice < $cantPartidas && !$partidaGanada ){
 
         // Verificamos si el nombre del jugador coincide y si el puntaje es mayor que 0 (es decir, ganó la partida)
