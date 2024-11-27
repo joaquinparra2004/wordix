@@ -17,7 +17,7 @@ include_once("wordix.php");
 /***** Inicialización de variables ****/
 /**************************************/
 
-$coleccionPalabras = cargarColeccionPalabras();
+$coleccionPalabras = cargarColeccionPalabras(); 
 $coleccionJugadores = cargarColeccionJugadores();
 $coleccionPartidas = cargarColeccionPartidas( 15, $coleccionPalabras, $coleccionJugadores);
 

@@ -69,7 +69,7 @@ function cargarColeccionPalabras()
         "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
         "TENIS", "POLLO", "LLAVE", "ARBOL", "JAMON",
         "TECLA", "HORAS", "PATOS", "VODKA"
-    ];
+    ]; 
 
     return $coleccionPalabras;
 }
@@ -428,50 +428,37 @@ function obtenerResumenJugador( $coleccionPartidas, $nombreJugador )
     return $resumen;
 }
 
-/**
+/** 
  * Muestra la colección de partidas ordenada por el nombre del jugador y luego por la palabra.
- * @param array $coleccionPartidas Colección de partidas a ordenar y mostrar
-*/
-function mostrarPartidasOrdenadas( $coleccionPartidas )
+ * La función ordena las partidas primero por el nombre del jugador (de forma alfabética),
+ * y si los jugadores son iguales, luego ordena por la palabra jugada (también de forma alfabética).
+ * Después, imprime los detalles de las partidas ordenadas.
+ * 
+ * @param array $coleccionPartidas Colección de partidas a ordenar y mostrar.
+ * @return void No devuelve ningún valor, solo muestra los detalles ordenados.
+ */
+function mostrarPartidasOrdenadas($coleccionPartidas)
 {
-    /*
-        array:
-            $a, $b = almacenan los valores dados de $coleccionPartidas
-            $partida = almacena los valores de $coleccionPartidas
+    // Ordenar las partidas por nombre de jugador y luego por palabra jugada
+    uasort($coleccionPartidas, function($a, $b) {
+        // Comparar por el nombre del jugador
+        $comparacionJugador = strcmp($a['jugador'], $b['jugador']);
         
-        int:
-            $comparacionJugador = si $a y $b son iguales es igual a 0. Si $a debe ir antes que $b es menor a 0. Caso contrario es mayor a 0
-    */
-
-    // Ordenar la colección por jugador y palabra usando uasort
-    uasort( $coleccionPartidas, function( $a, $b ){//uasort ordena un arreglo asociativo según la lógica definida, en este caso "function ($a, $b)"
-
-        // Comparar por jugador
-        $comparacionJugador = strcmp( $a[ 'jugador' ], $b[ 'jugador' ] );//strcmp compara los strings proporcionados
-        
-        // Si los jugadores son iguales, comparar por palabra
-        if( $comparacionJugador === 0 ){
-
-            return strcmp( $a[ 'palabraWordix' ], $b[ 'palabraWordix' ] );
-        }
-        
-        // Retornar la comparación por jugador
-        return $comparacionJugador;
+        // Si los jugadores son iguales, comparar por la palabra jugada
+        return $comparacionJugador === 0 
+            ? strcmp($a['palabraWordix'], $b['palabraWordix']) // strcmp() compara si las dos palabras son iguales
+            : $comparacionJugador; // sino compara por jugador
     });
 
-    // Mostrar la colección ordenada
+    // Mostrar las partidas ordenadas
     echo "\n";
-    foreach ( $coleccionPartidas as $partida ){
-        /* echo "Jugador: " . $partida[ 'jugador' ] . "\n";
-        echo "Palabra: " . $partida[ 'palabraWordix' ] . "\n";
-        echo "Puntaje: " . $partida[ 'puntaje' ] . "\n";
-        echo "-----------------------------\n";
-        */
-        echo "Detalles de la partida:\n";
-        print_r($partida);
+    foreach ($coleccionPartidas as $partida) {
+        echo "Jugador: " . $partida['jugador'] . "\n";
+        echo "Palabra: " . $partida['palabraWordix'] . "\n";
         echo "-----------------------------\n";
     }
 }
+
 
 function mostrarJugadores( $coleccionJugadores ){
     echo "\nJugadores: \n";
@@ -711,16 +698,20 @@ function buscarJugador( $coleccionJugadores, $nombreJugador ){
     /*
         int:
             $columna: numero de columna del array 
+            $indice : Inicializamos la variable con -1 (valor por defecto si no se encuentra el jugador)
         array:
             $jugador: array asociativo que guarda los datos del jugador
     */
-
+    $indice = -1;
+    
+    //bucle de recorrido exhaustivo, ya que continúa iterando sobre la colección de jugadores incluso después de encontrar al jugador
     foreach ( $coleccionJugadores as $columna => $jugador ) {
         if ( $jugador === $nombreJugador ) {
-            return $columna;
+            $indice = $columna;
         }
     }
-    return -1;
+
+    return $indice;
 }
 
 /**
@@ -906,23 +897,26 @@ function esIntentoGanado( $estructuraPalabraIntento ){
  * @param array $coleccionPartidas - Colección de partidas jugadas
  * @param string $jugador - Nombre del jugador
  * @param string $palabra - Palabra wordix seleccionada
- * @return bool - True si la palabra ya fue jugada, False en caso contrario
+ * @return boolean - True si la palabra ya fue jugada, False en caso contrario
  */
 function palabraYaJugada( $coleccionPartidas, $jugador, $palabra )
 {
     /*
         array:
             $partida = almacena los valores de $coleccionPartida
+        boolean:
+            $yaJugada = True si la palabra ya fue jugada, False en caso contrario
     */
+    $yaJugada = false;
 
     foreach ( $coleccionPartidas as $partida ){
 
         // Verificar si el jugador ya jugó con esta palabra
         if ( $partida[ 'jugador' ] === $jugador && $partida[ 'palabraWordix' ] === $palabra ) {
-            return true; // La palabra ya fue jugada
+            $yaJugada = true; // La palabra ya fue jugada
         }
     }
-    return false; // La palabra no fue jugada
+    return $yaJugada; 
 }
 
 /**
